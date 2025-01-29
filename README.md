@@ -15,3 +15,8 @@ Clone Repository:
 git clone https://MVP_LagosTrip-FreeProject_2025/
 cd  MVP_LagosTrip-FreeProject_2025
 ```
+
+Launch the server and the client
+
+```bash
+```
