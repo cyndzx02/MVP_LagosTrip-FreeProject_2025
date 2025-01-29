@@ -20,3 +20,6 @@ Launch the server and the client
 
 ```bash
 ```
+
+## Architecture
+![alt text](images/MVP.png)
