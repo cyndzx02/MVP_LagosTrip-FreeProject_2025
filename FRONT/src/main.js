@@ -5,9 +5,10 @@
 
 // createApp(App).mount('#app')
 
-
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import { createApp } from 'vue'
 import App from './App.vue'
+import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.css';
 import axios from './axiosConfig'; // Importation de l'intercepteur

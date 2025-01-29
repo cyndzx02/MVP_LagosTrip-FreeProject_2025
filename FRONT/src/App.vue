@@ -5,11 +5,13 @@
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <!-- <LoginView/> -->
   <RouterView /> 
+  <!-- <Login/> -->
+  
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-// import LoginView from './components/LoginView.vue'
+import Login from './components/Login.vue'
 export default {
   name: 'App',
   components: {

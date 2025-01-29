@@ -1,16 +1,15 @@
 // src/components/router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
-// import Login from '../Signup.vue'  
-// import Welcome from '../Accueil.vue'
-// import Sign_up from '../Signup.vue'
-// import Sign_in from '../Signin.vue'
-import Main from '../Main.vue'
+import Register from '../Register.vue'
+import Login from '../Login.vue'
+import Home from '../Home.vue'
 
 const routes = [
-  // { path: '/', component: Welcome },
-  // { path: '/Signup', component: Sign_up },
-  // { path: '/Signin', component: Sign_in },
-  { path: '/Main', component: Main , meta: { requiresAuth: true }},
+  {path: '/register', name: 'Register', component: Register},
+  {path: '/login', name: 'Login', component: Login},
+  { path: '/home', name: 'Home',component: Home },
+
+  // { path: '/Home', component: Home , meta: { requiresAuth: true }},
 
 ]
 
