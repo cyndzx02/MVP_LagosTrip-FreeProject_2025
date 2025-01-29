@@ -22,4 +22,4 @@ Launch the server and the client
 ```
 
 ## Architecture
-![alt text](images/MVP.png)
+![architect](Doc/images/MVP.png)
