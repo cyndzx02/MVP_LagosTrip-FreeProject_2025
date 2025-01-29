@@ -1,6 +1,4 @@
-# MVP_LagosTrip-FreeProject_2025
-
-## AgroNova
+# AgroNova
 This project answers a real problem.
 Which is: How do we access local product in our towns?
 How do our cultivators make the population access fresh products?
