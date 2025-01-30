@@ -59,9 +59,9 @@ import fruit from "../assets/Categories/fruit.png";
 import veggies from "../assets/Categories/vegetable.png";
 import meat from "../assets/Categories/meat.png";
 import fish from "../assets/Categories/fish.png";
-import epices from "../assets/Categories/sauces.png";
-import diaries from "../assets/Categories/dairy-products.png";
-import frozen from "../assets/Categories/frozen.png";
+// import epices from "../assets/Categories/sauces.png";
+// import diaries from "../assets/Categories/dairy-products.png";
+// import frozen from "../assets/Categories/frozen.png";
 
 export default {
   name: "HomePage",
@@ -70,13 +70,13 @@ export default {
       searchQuery: "",
       
      categories: [
-        { name: "Fruits", icon:  fruit, url: '/Fruits' },
+        { name: "Fruits", icon:  fruit },
         { name: "Légumes", icon: veggies },
         { name: "Viandes", icon:  meat},
         { name: "Poissons", icon: fish },
-        { name: "Epicerie", icon: epices},
-        { name: "Crèmerie", icon: diaries },
-        { name: "Surgelés", icon: frozen },
+        // { name: "Epicerie", icon: epices},
+        // { name: "Crèmerie", icon: diaries },
+        // { name: "Surgelés", icon: frozen },
       ],
     };
   },
