@@ -29,7 +29,9 @@ async function generateToken() {
         console.log("Token généré :", response.data.access_token);
         return response.data.access_token;
     } catch (error) {
-        c
+        console.error("Erreur lors de la génération du token :", error.response?.data || error.message);
+        return null;
+    }
 }
 
 module.exports = { generateToken };
