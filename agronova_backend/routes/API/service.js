@@ -12,7 +12,10 @@ async function generateToken() {
     const clientSecret = "YZMqZezsltpSPNb4+49PGeP7lYkzKn1a5SaVSyzKOiI=";
     const encodedCredentials = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
 
-      }
+    const url = "https://passport.k8.isw.la/passport/oauth/token";
+
+    const params = new URLSearchParams();
+   
 }
 
 module.exports = { generateToken };
