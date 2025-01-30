@@ -1,5 +1,6 @@
 const express = require('express');
 const { generateToken } = require('./service');
+const { CheckCard } = require('./CardVerification');
 
 const user = express.Router();
 
@@ -14,5 +15,8 @@ user.get('/access-token', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+user.get('/check-card', CheckCard);
+
 
 module.exports = user;
