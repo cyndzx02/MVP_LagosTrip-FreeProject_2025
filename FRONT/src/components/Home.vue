@@ -68,15 +68,26 @@ export default {
   data() {
     return {
       searchQuery: "",
-     categories: [
-        { name: "Fruits", icon:  fruit, url: '/Fruits' },
-        { name: "Légumes", icon: veggies },
-        { name: "Viandes", icon:  meat},
-        { name: "Poissons", icon: fish },
-        { name: "Epicerie", icon: epices},
-        { name: "Crèmerie", icon: diaries },
-        { name: "Surgelés", icon: frozen },
-      ],
+      categories: {
+        Légumes: [
+          { name: "Carotte", icon: 10, image:  },
+          { name: "Tomate", price: 15, image:  }
+        ],
+        Viandes: [
+          { name: "Bœuf", price: 50, image:  },
+          { name: "Poulet", price: 30, image:  }
+        ],
+
+      },
+    //  categories: [
+    //     { name: "Fruits", icon:  fruit, url: '/Fruits' },
+    //     { name: "Légumes", icon: veggies },
+    //     { name: "Viandes", icon:  meat},
+    //     { name: "Poissons", icon: fish },
+    //     { name: "Epicerie", icon: epices},
+    //     { name: "Crèmerie", icon: diaries },
+    //     { name: "Surgelés", icon: frozen },
+    //   ],
     };
   },
   methods: {
