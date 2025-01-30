@@ -55,39 +55,29 @@
 </template>
 
 <script>
-import fruit from "../assets/fruit.png";
-import veggies from "../assets/vegetable.png";
-import meat from "../assets/meat.png";
-import fish from "../assets/fish.png";
-import epices from "../assets/sauces.png";
-import diaries from "../assets/dairy-products.png";
-import frozen from "../assets/frozen.png";
+import fruit from "../assets/Categories/fruit.png";
+import veggies from "../assets/Categories/vegetable.png";
+import meat from "../assets/Categories/meat.png";
+import fish from "../assets/Categories/fish.png";
+import epices from "../assets/Categories/sauces.png";
+import diaries from "../assets/Categories/dairy-products.png";
+import frozen from "../assets/Categories/frozen.png";
 
 export default {
   name: "HomePage",
   data() {
     return {
       searchQuery: "",
-      categories: {
-        Légumes: [
-          { name: "Carotte", icon: 10, image:  },
-          { name: "Tomate", price: 15, image:  }
-        ],
-        Viandes: [
-          { name: "Bœuf", price: 50, image:  },
-          { name: "Poulet", price: 30, image:  }
-        ],
-
-      },
-    //  categories: [
-    //     { name: "Fruits", icon:  fruit, url: '/Fruits' },
-    //     { name: "Légumes", icon: veggies },
-    //     { name: "Viandes", icon:  meat},
-    //     { name: "Poissons", icon: fish },
-    //     { name: "Epicerie", icon: epices},
-    //     { name: "Crèmerie", icon: diaries },
-    //     { name: "Surgelés", icon: frozen },
-    //   ],
+      
+     categories: [
+        { name: "Fruits", icon:  fruit, url: '/Fruits' },
+        { name: "Légumes", icon: veggies },
+        { name: "Viandes", icon:  meat},
+        { name: "Poissons", icon: fish },
+        { name: "Epicerie", icon: epices},
+        { name: "Crèmerie", icon: diaries },
+        { name: "Surgelés", icon: frozen },
+      ],
     };
   },
   methods: {
