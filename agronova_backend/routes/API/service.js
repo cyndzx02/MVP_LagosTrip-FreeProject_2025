@@ -15,7 +15,18 @@ async function generateToken() {
     const url = "https://passport.k8.isw.la/passport/oauth/token";
 
     const params = new URLSearchParams();
-   
+    params.append("grant_type", "client_credentials");
+    params.append("scope", "profile");
+
+    try {
+        const response = await axios.post(url, params.toString(), {
+            headers: {
+                "Authorization": `Basic ${encodedCredentials}`,
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        });
+
+    
 }
 
 module.exports = { generateToken };
