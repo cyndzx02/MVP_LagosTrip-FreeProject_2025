@@ -27,4 +27,4 @@ function generete_token() {
     }
 }
 
-module.exports.generete_token = generete_token;
+module.exports.generete_token = generete_token; 
