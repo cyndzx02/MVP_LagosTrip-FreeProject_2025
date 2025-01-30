@@ -1,21 +1,17 @@
 <template>
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <div class="login-box">
-        <!-- <div>
-          <h3>Login</h3>
-          <hr />
-        </div> -->
+      <div class="">
         <form class="form-login" @submit.prevent="handleSubmit">
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" class="form-control" required v-model="email" />
+          <div class="">
+            <label class="all-label">Email</label>
+            <input type="email" class="form-input" required v-model="email" />
           </div>
-          <div class="form-group">
-            <label>Password</label>
+          <div class="">
+            <label class="all-label">Password</label>
             <input
               type="password"
-              class="form-control"
+              class="form-input"
               required
               v-model="password"
             />
@@ -23,7 +19,7 @@
           </div>
 
           <div class="my-3">
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary pill login-button">Login</button>
           </div>
         </form>
       </div>
@@ -34,7 +30,7 @@
 
 <script>
 export default {
-  name: "Login",
+  name: "LoginPage",
   data() {
     return {
       email: "",
@@ -60,25 +56,37 @@ export default {
 
 <style>
 /* { */
-form {
-  max-width: 420px;
-  margin: 30px auto;
-  background: white;
-  text-align: left;
-  padding: 40px;
-  border-radius: 10px;
+
+/* .login-box{
+  /* background-color: black !important; */
+
+.login-button{
+  margin-left: 0 !important;
+  font-size: 70%;
+  width: 50% !important;
+  align-self: center;
+  background-color: rgb(6, 6, 66);
+}
+
+.form-login {
+  max-width: 420px !important;
+  margin: 30px auto !important;
+  background: rgb(207, 203, 203) !important;
+  text-align: left !important;
+  padding: 40px !important;
+  border-radius: 10px !important;
   /* margin-top: 5%; */
 }
-label {
-  color: #aaa;
-  display: inline-block;
-  margin: 25px 0 15px;
-  font-size: 0.6em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: bold;
+.all-label {
+  color: #aaa !important;
+  display: inline-block !important;
+  margin: 25px 0 15px !important;
+  font-size: 0.6em !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  font-weight: bold !important;
 }
-input {
+.form-input {
   display: block;
   padding: 10px 6px;
   width: 100%;

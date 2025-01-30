@@ -7,14 +7,14 @@
         class="img-fluid agro-logo"
       />
     </div>
-    <div class="row location-and-basket border">
+    <div class="row location-and-basket">
       <div class="location align-self-center row">
         <span class="col town-location">
           <i class="bi bi-geo-alt-fill location"></i>
           <p class="town">Cotonou</p>
         </span>
         <div class="col basket-only">
-          <i class="bi bi-basket2 border basket-logo col"></i>
+          <i class="bi bi-basket2 basket-logo col"></i>
         </div>
       </div>
     </div>
@@ -32,54 +32,50 @@
         />
       </span>
     </div>
-    <div class="cards border mt-5"></div>
+    <div class="cards mt-5"></div>
 
     <div class="mt-3 container">
       <div class="d-flex justify-content-between align-items-center">
         <h5 class="fw-bold">Nos catégories</h5>
-        <a href="#" class="text-black fw-bold">Voir plus &gt;</a>
       </div>
 
       <div class="row mt-3">
-        <div
+        <div 
           v-for="(category, index) in categories"
           :key="index"
           class="col-4 col-md-3 text-center">
           <div class="category-circle mt-2">
-            <img :src="category.icon" :alt="category.name" class="img-fluid" />
+            <img :src="category.icon"  :url="category.url" :alt="category.name" class="categoryimg img-fluid"/>
           </div>
-          <!-- <p class="mt-2">{{ category.name }}</p> -->
+          {{ category.name }}
         </div>
       </div>
-    </div>
-    <!-- <div class="categories-voirplus border">
-        <p class="categories">Nos Categories</p>
-    </div> -->
-    <!-- <div class="nouveaute border">
-        <p class="nouveaute">Nouveautes !</p>
-    </div> -->
-    <div class="fruit&legume border">
-      <p class="fruit-and-legumes">Fruits & Legumes</p>
     </div>
   </div>
 </template>
 
 <script>
-import logo from "@/assets/logo.png";
+import fruit from "../assets/fruit.png";
+import veggies from "../assets/vegetable.png";
+import meat from "../assets/meat.png";
+import fish from "../assets/fish.png";
+import epices from "../assets/sauces.png";
+import diaries from "../assets/dairy-products.png";
+import frozen from "../assets/frozen.png";
+
 export default {
-  name: "Home",
+  name: "HomePage",
   data() {
     return {
       searchQuery: "",
-      categories: [
-        { name: "Fruits", icon: "" },
-        { name: "Légumes", icon: "" },
-        { name: "Viandes", icon: "" },
-        { name: "Poissons", icon: "" },
-        { name: "Epicerie", icon: "" },
-        { name: "Crèmerie", icon: "" },
-        { name: "Surgelés", icon: "" },
-        { name: "Entretien", icon: "" },
+     categories: [
+        { name: "Fruits", icon:  fruit, url: '/Fruits' },
+        { name: "Légumes", icon: veggies },
+        { name: "Viandes", icon:  meat},
+        { name: "Poissons", icon: fish },
+        { name: "Epicerie", icon: epices},
+        { name: "Crèmerie", icon: diaries },
+        { name: "Surgelés", icon: frozen },
       ],
     };
   },
@@ -97,13 +93,13 @@ export default {
   height: 80px;
   background-color: #0a2850;
   border-radius: 50%;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   margin: auto;
 }
 
-.category-circle img {
+.category-circle .categoryimg {
   width: 50px;
   height: 50px;
   object-fit: contain;
@@ -115,7 +111,7 @@ export default {
   margin-top: 2% !important;
 }
 .basket-logo {
-  position: relative;
+  /* position: relative; */
   margin-left: 50%;
   /* border: 7px 0 0 7px; */
   height: 10% !important;
