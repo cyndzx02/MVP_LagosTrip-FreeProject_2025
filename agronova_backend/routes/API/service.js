@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
-// let token = '';
 const base = require('base-64');
 
 
