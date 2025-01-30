@@ -29,31 +29,73 @@
 
 <script>
 
-import tomato from "../assets/Veggies/tomato.png"
-import ails from "../assets/Veggies/ails.png"
-// import ginger from "../assets/Veggies/ginger.png"
-// import gombo from "../assets/Veggies/gombo.png"
+// Veggies
+import Tomate from "../assets/Veggies/tomato.png"
+import Ails from "../assets/Veggies/ails.png"
+import Aubergine from "../assets/Veggies/aubergine.png"
+import Carotte from "../assets/Veggies/carotte.png"
+import Concombre from "../assets/Veggies/concombre.png"
+import Ginger from "../assets/Veggies/ginger.png"
+import Gombo from "../assets/Veggies/gombo.png"
+import Haricot_Rouge from "../assets/Veggies/haricotrouge.png"
+import Haricot_Vert from "../assets/Veggies/haricotvert.png"
+import Laittue from "../assets/Veggies/laittue.png"
 
+// Viandes
+import Boeuf from "../assets/Meats/beef.png"
+import Chicken_Breast from "../assets/Meats/chicken-breast.png"
+import Chicken_Meat from "../assets/Meats/chicken-meat.png"
+import rawMeat from "../assets/Meats/rawMeat.png"
 
+// Fruits
+import Banane from "../assets/Fruits/banane.png"
+import Fraise from "../assets/Fruits/fraise.png"
+import Orange from "../assets/Fruits/orange.png"
+import Kiwi from "../assets/Fruits/kiwi.png"
+import Passion_Fruits from "../assets/Fruits/passionFruit.png"
+
+// Fishes
+import Tilapia from "../assets/Fishes/tilapia.png"
+import Sardine from "../assets/Fishes/sardine.png"
+import Tuna from "../assets/Fishes/tuna.png"
 
 export default {
   data() {
     return {
       searchQuery: "",
-      items: [
-        { name: "Tomate", price: 10, image: tomato },
-        { name: "Ail", price: 20, image: ails },
-        // { name: "Gombo", price: 20, image: gombo },
-        // { name: "Ail", price: 20, image: ginger },
-        // { name: "Ail", price: 20, image: epinard },
-        // { name: "Ail", price: 20, image: haricotrouge },
-        // { name: "Ail", price: 20, image: haricotvert },
-        // { name: "Ail", price: 20, image: persil },
-        // { name: "Produit 3", price: 30, image:  },
-        // { name: "Produit 4", price: 40, image:  },
-        // { name: "Produit 5", price: 50, image:  },
-        // { name: "Produit 6", price: 60, image:  }
-      ]
+      items: {
+        Légumes: [
+          { name: "Carotte", price: 20, image:  Carotte},
+          { name: "Tomate",  price: 50, image: Tomate },
+          { name: "Ails",  price: 50, image: Ails },
+          { name: "Aubergine",  price: 50, image: Aubergine },
+          { name: "Concombre",  price: 50, image: Concombre },
+          { name: "Ginger",  price: 50, image: Ginger },
+          { name: "Gombo",  price: 50, image: Gombo },
+          { name: "Haricot Rouge",  price: 50, image: Haricot_Rouge },
+          { name: "Haricot Vert",  price: 50, image: Haricot_Vert },
+          { name: "Laittue",  price: 50, image: Laittue },
+        ],
+        Viandes: [
+          { name: "Bœuf", price: 50, image: Boeuf },
+          { name: "Chicken Breast", price: 30, image:  Chicken_Breast},
+          { name: "Chicken Meat", price: 30, image:  Chicken_Meat},
+          { name: "Raw Meat", price: 30, image:  rawMeat},
+        ],
+        Poissons: [
+          { name: "Tilapia", price: 50, image:  Tilapia},
+          { name: "Tuna", price: 30, image:  Tuna},
+          { name: "Sardine", price: 30, image:  Sardine},
+        ],
+        Fruits: [
+          { name: "Banane", price: 50, image:  Banane},
+          { name: "Kiwi", price: 320, image: Kiwi },
+          { name: "Fraise", price: 300, image: Fraise },
+          { name: "Orange", price: 30, image: Orange },
+          { name: "Fruit de la passion", price: 30, image: Passion_Fruits },
+        ],
+
+      },
     };
   },
   computed: {
