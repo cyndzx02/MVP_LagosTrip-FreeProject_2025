@@ -1,37 +1,48 @@
 {
-  "name": "login-project",
-  "version": "0.0.0",
+  "name": "mvp-app",
+  "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.6.0",
-    "@fullcalendar/core": "^6.1.15",
-    "@fullcalendar/daygrid": "^6.1.15",
-    "@fullcalendar/interaction": "^6.1.15",
-    "@fullcalendar/list": "^6.1.15",
-    "@fullcalendar/timegrid": "^6.1.15",
-    "@fullcalendar/vue3": "^6.1.15",
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "axios": "^1.7.9",
-    "bootstrap": "^5.3.3",
-    "bootstrap-icons": "^1.11.3",
-    "bootstrap-vue": "^2.23.1",
-    "chart.js": "^4.4.4",
-    "font-awesome": "^4.7.0",
-    "fullcalendar": "^6.1.15",
-    "jquery": "^3.7.1",
-    "leaflet": "^1.9.4",
-    "vue": "^3.4.38",
-    "vue-router": "^4.4.3",
-    "vue3-google-map": "^0.21.0",
-    "vuex": "^4.1.0"
+    "core-js": "^3.8.3",
+    "register-service-worker": "^1.7.2",
+    "vue": "^3.2.13",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.5",
-    "vite": "^5.4.2"
-  }
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-pwa": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
 }

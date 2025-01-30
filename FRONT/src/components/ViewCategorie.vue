@@ -31,7 +31,7 @@
 
 import tomato from "../assets/Veggies/tomato.png"
 import ails from "../assets/Veggies/ails.png"
-// import ginger from ""
+// import ginger from "../assets/Veggies/ginger.png"
 // import gombo from "../assets/Veggies/gombo.png"
 
 
