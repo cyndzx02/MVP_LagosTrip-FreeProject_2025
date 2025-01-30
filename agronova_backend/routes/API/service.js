@@ -6,25 +6,13 @@ const jwt = require('jsonwebtoken');
 // let token = '';
 const base = require('base-64');
 
-function generete_token() {
-    const auth = 'Basic' + base64.encode(`${process.env.CLIENT_ID}:${process.env.SECRET_KEY}`);
-    const body = {
-        method: 'GET',
-        headers: {
-            // accept: 'application/json',
-            'Authorization': auth,
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    };
 
-    try {
-        const response = fetch('https://passport.k8.isw.la/passport/oauth/token?grant_type=client_credentials', body)
-            .then(res => res.json())
-            .then(res => console.log(res))
-            .catch(err => console.error(err));
-    } catch (error) {
-        console.error('Error:', error.message)
-    }
+async function generateToken() {
+    const clientId = "IKIA72C65D005F93F30E573EFEAC04FA6DD9E4D344B1";
+    const clientSecret = "YZMqZezsltpSPNb4+49PGeP7lYkzKn1a5SaVSyzKOiI=";
+    const encodedCredentials = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
+
+      }
 }
 
-module.exports.generete_token = generete_token; 
+module.exports = { generateToken };
