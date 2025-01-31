@@ -1,73 +1,85 @@
 <template>
-    <div class="cart-page">
-      <div class="cart-container">
-        <h2>Votre Panier</h2>
-  
-        <div v-if="cartItems.length === 0" class="empty-cart">
-          <p>Votre panier est vide.</p>
-        </div>
-  
-        <div v-else>
-          <!-- Liste des articles du panier -->
-          <div v-for="(item, index) in cartItems" :key="index" class="cart-item">
-            <div class="cart-item-details">
-              <h3>{{ item.name }}</h3>
-              <p>Prix : {{ item.price }} €</p>
-              <div class="quantity-control">
-                <button @click="decreaseQuantity(index)" :disabled="item.quantity <= 1">-</button>
-                <span>{{ item.quantity }}</span>
-                <button @click="increaseQuantity(index)">+</button>
-              </div>
-              <p>Total : {{ (item.price * item.quantity).toFixed(2) }} €</p>
-              <button @click="removeFromCart(index)" class="remove-item">Supprimer</button>
+  <div class="cart-page">
+    <div class="cart-container">
+      <h2>Votre Panier</h2>
+
+      <div v-if="cartItems.length === 0" class="empty-cart">
+        <p>Votre panier est vide.</p>
+      </div>
+
+      <div v-else>
+        <!-- Liste des articles du panier -->
+        <div v-for="(item, index) in cartItems" :key="index" class="cart-item">
+          <div class="cart-item-details">
+            <h3>{{ item.name }}</h3>
+            <p>Prix : {{ item.price }} €</p>
+            <div class="quantity-control">
+              <button @click="decreaseQuantity(index)" :disabled="item.quantity <= 1">-</button>
+              <span>{{ item.quantity }}</span>
+              <button @click="increaseQuantity(index)">+</button>
             </div>
+            <p>Total : {{ (item.price * item.quantity).toFixed(2) }} €</p>
+            <button @click="removeFromCart(index)" class="remove-item">Supprimer</button>
           </div>
-  
-          <!-- Total du panier -->
-          <div class="cart-total">
-            <h3>Total : {{ totalPrice }} €</h3>
-            <button @click="checkout" class="checkout-button">Passer à la caisse</button>
-          </div>
+        </div>
+
+        <!-- Total du panier -->
+        <div class="cart-total">
+          <h3>Total : {{ totalPrice }} €</h3>
+          <button @click="checkout" class="checkout-button">Passer à la caisse</button>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        cartItems: [
-          { name: "Aliment 1", price: 10, quantity: 2 },
-          { name: "Aliment 2", price: 15, quantity: 1 },
-        ],
-      };
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      // Charger les items du panier depuis le localStorage
+      cartItems: JSON.parse(localStorage.getItem('cart')) || [], // S'il n'y a rien, on initialise un tableau vide
+    };
+  },
+  computed: {
+    // Calcul du total du panier
+    totalPrice() {
+      return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
     },
-    computed: {
-      totalPrice() {
-        return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
-      },
+  },
+  methods: {
+    // Méthode pour augmenter la quantité d'un produit
+    increaseQuantity(index) {
+      this.cartItems[index].quantity++;
+      this.updateLocalStorage(); // Mise à jour du localStorage après modification
     },
-    methods: {
-      increaseQuantity(index) {
-        this.cartItems[index].quantity++;
-      },
-      decreaseQuantity(index) {
-        if (this.cartItems[index].quantity > 1) {
-          this.cartItems[index].quantity--;
-        }
-      },
-      removeFromCart(index) {
-        this.cartItems.splice(index, 1);
-      },
-      checkout() {
-        alert("Passer à la caisse");
-        // Implémentez ici la logique pour le paiement ou la confirmation de commande
-      },
+    // Méthode pour diminuer la quantité d'un produit
+    decreaseQuantity(index) {
+      if (this.cartItems[index].quantity > 1) {
+        this.cartItems[index].quantity--;
+        this.updateLocalStorage(); // Mise à jour du localStorage après modification
+      }
     },
-  };
-  </script>
-  
+    // Méthode pour supprimer un produit du panier
+    removeFromCart(index) {
+      this.cartItems.splice(index, 1);
+      this.updateLocalStorage(); // Mise à jour du localStorage après suppression
+    },
+    updateLocalStorage() {
+      localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    },
+    checkout() {
+      alert("Passer à la caisse");
+    },
+  },
+  watch: {
+    cartItems(newCartItems) {
+      localStorage.setItem('cart', JSON.stringify(newCartItems));
+    },
+  },
+};
+</script>
+
   <style scoped>
   /* Style global de la page */
   .cart-page {
