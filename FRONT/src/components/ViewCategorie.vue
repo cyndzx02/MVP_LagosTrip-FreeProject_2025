@@ -1,34 +1,31 @@
 <template>
-    <div class="container">
+  <div class="container">
+    <header>
+      <i class="fas fa-arrow-left"></i>
+      <h2>{{ category }}</h2> <!-- Affiche le titre en fonction de la catégorie -->
+    </header>
 
-        <header>
-        <i class="fas fa-arrow-left"></i>
-        <h2>Legume</h2>
-      </header>
-      <!-- Barre de recherche -->
-      <div class="search-bar">
-        <input type="text" placeholder="Rechercher..." v-model="searchQuery" />
-        <button class="search-button" @click="search">
-          <i class="fas fa-search"></i> <!-- Icône de recherche -->
-        </button>
-      </div>
-  
-      <!-- Liste des articles -->
-      <div class="item-list">
-        <div class="item" v-for="(item, index) in filteredItems" :key="index">
-          <div class="circle">
-            <img :src="item.image" alt="Produit" class="item-image" />
-            <button class="add-btn"><i class="fas fa-plus"></i></button>
-          </div>
-          <p class="item-price">{{ item.price }} €</p>
-          <p class="item-name">{{ item.name }}</p>
+    <div class="search-bar">
+      <input type="text" placeholder="Rechercher..." v-model="searchQuery" />
+      <button class="search-button" @click="search">
+        <i class="fas fa-search"></i> 
+      </button>
+    </div>
+
+    <div class="item-list">
+      <div class="item" v-for="(item, index) in filteredItems" :key="index">
+        <div class="circle">
+          <img :src="item.image" alt="Produit" class="item-image" />
+          <button class="add-btn" @click="goToSpecifiqueFood(item.name)"><i class="fas fa-plus"></i></button>
         </div>
+        <p class="item-price">{{ item.price }} €</p>
+        <p class="item-name">{{ item.name }}</p>
       </div>
     </div>
-  </template>
+  </div>
+</template>
 
 <script>
-
 // Veggies
 import Tomate from "../assets/Veggies/tomato.png"
 import Ails from "../assets/Veggies/ails.png"
@@ -63,6 +60,7 @@ export default {
   data() {
     return {
       searchQuery: "",
+      category: this.$route.params.category, // Récupérer le paramètre 'category' de l'URL
       items: {
         Légumes: [
           { name: "Carotte", price: 20, image:  Carotte},
@@ -98,9 +96,15 @@ export default {
       },
     };
   },
+  created() {
+    console.log("Catégorie récupérée:", this.category); // Affiche la catégorie dans la console
+  },
   computed: {
+    
     filteredItems() {
-      return this.items.filter(item => {
+      // Filtrer les items en fonction de la catégorie et de la recherche
+      const categoryItems = this.items[this.category] || []; // Vérifier si la catégorie existe
+      return categoryItems.filter(item => {
         return item.name.toLowerCase().includes(this.searchQuery.toLowerCase());
       });
     }
@@ -108,10 +112,15 @@ export default {
   methods: {
     search() {
       console.log("Recherche effectuée pour : ", this.searchQuery);
-    }
+    },
+    goToSpecifiqueFood(foodName) {
+    this.$router.push({ name: 'SpecifiqueFood', params: { foodName: foodName } });
+  }
   }
 };
 </script>
+
+
 
 <style>
 /* Styles de base */
