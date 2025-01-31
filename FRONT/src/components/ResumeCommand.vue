@@ -69,13 +69,10 @@ export default {
   data() {
     return {
       // Informations de la commande
-      totalPrice: 50,  // Exemple de prix total
+      // totalPrice: 50,  
       deliveryPrice: 10,  // Exemple de prix de livraison
-      cartItems: [
-        { name: 'Produit 1', price: 15 },
-        { name: 'Produit 2', price: 20 },
-        { name: 'Produit 3', price: 25 }
-      ],
+      cartItems: JSON.parse(localStorage.getItem('cart')) || [], // S'il n'y a rien, on initialise un tableau vide
+
       location: {
         city: 'Paris',
         district: 'Le Marais',
@@ -86,6 +83,12 @@ export default {
       showLocationInfo: false
 
     };
+  },
+  computed: {
+    // Calcul du total du panier
+    totalPrice() {
+      return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+    },
   },
   methods: {
     toggleSummary() {
@@ -101,12 +104,10 @@ export default {
 };
 </script>
 <style scoped>
-/* Container principal */
 .container {
   padding: 20px;
 }
 
-/* Card container */
 .summary-container {
   display: flex;
   flex-direction: column;
@@ -117,7 +118,6 @@ export default {
   font-family: Arial, sans-serif;
 }
 
-/* Carte de résumé de commande */
 .card {
   background-color: #f9f9f9;
   padding: 20px;
@@ -128,7 +128,6 @@ export default {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Titres et paragraphes à l'intérieur des cartes */
 .card h3 {
   margin: 0;
   font-size: 20px;
@@ -140,7 +139,6 @@ export default {
   font-size: 16px;
 }
 
-/* Liste des produits dans la carte */
 .card ul {
   list-style: none;
   padding: 0;
@@ -165,14 +163,14 @@ export default {
 }
 
 .step {
-  width: 40px; /* Taille des étapes plus grande */
+  width: 40px; 
   height: 40px;
   background-color: #e0e0e0;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px; /* Taille de la police plus grande */
+  font-size: 20px; 
   color: black;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -195,7 +193,6 @@ export default {
   background: linear-gradient(to right, #008080, #00b3b3, #008080);
 }
 
-/* Bouton "Suivant" */
 .btn {
   padding: 10px 20px;
   background-color: #008080;
@@ -210,25 +207,24 @@ export default {
   background-color: #45a049;
 } */
 
-/* Responsive Design : Adaptation pour les écrans mobiles et tablettes */
 
 /* Lorsque l'écran est plus petit que 768px */
 @media (max-width: 768px) {
   .summary-container {
     padding: 15px;
-    width: 100%; /* Laisser la largeur s'étendre au maximum */
+    width: 100%; 
   }
 
   .card h3 {
-    font-size: 18px; /* Réduire la taille des titres pour les petits écrans */
+    font-size: 18px; 
   }
 
   .card p {
-    font-size: 14px; /* Réduire la taille du texte */
+    font-size: 14px;
   }
 
   .card li {
-    font-size: 12px; /* Réduire la taille de la liste */
+    font-size: 12px; 
   }
 
   .progress-bar {
