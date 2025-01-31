@@ -1,53 +1,32 @@
 <template>
-  <div class="row home-page">
-    <div class="logo-agro d-flex justify-content-center">
-      <img
-        src="../assets/agronova-logo.png"
-        alt="Logo"
-        class="img-fluid agro-logo"
-      />
-    </div>
-    <div class="row location-and-basket">
-      <div class="location align-self-center row">
-        <span class="col town-location">
-          <i class="bi bi-geo-alt-fill location"></i>
-          <p class="town">Cotonou</p>
-        </span>
-        <div class="col basket-only">
-          <i class="bi bi-basket2 basket-logo col"></i>
-        </div>
+  <div class="container home-page text-center">
+    <!-- Localisation et panier -->
+    <div class="row location-and-basket d-flex justify-content-between align-items-center px-3 mt-4">
+      <div class="location d-flex align-items-center">
+        <i class="bi bi-geo-alt-fill location-icon"></i>
+      </div>
+      <div class="basket">
+        <i class="bi bi-basket2 basket-logo"></i>
       </div>
     </div>
 
-    <div class="row search_bar">
-      <span class="input-group">
-        <i class="bi bi-search icon"></i>
-
-        <input
-          v-model="searchQuery"
-          type="text"
-          class="form-control"
-          placeholder="De quoi avez vous besoin aujourd'hui ?"
-          @input="onSearch"
-        />
-      </span>
+    <!-- Barre de recherche améliorée -->
+    <div class="search-bar">
+      <input type="text" placeholder="Rechercher..." v-model="searchQuery" @input="filterCategories"/>
+      <button class="search-button" @click="search">
+        <i class="fas fa-search"></i> <!-- Icône de recherche -->
+      </button>
     </div>
-    <div class="cards mt-5"></div>
 
-    <div class="mt-3 container">
-      <div class="d-flex justify-content-between align-items-center">
-        <h5 class="fw-bold">Nos catégories</h5>
-      </div>
-
-      <div class="row mt-3">
-        <div 
-          v-for="(category, index) in categories"
-          :key="index"
-          class="col-4 col-md-3 text-center">
-          <div class="category-circle mt-2">
-            <img :src="category.icon"  :url="category.url" :alt="category.name" class="categoryimg img-fluid"/>
+    <!-- Section catégories -->
+    <div class="mt-5 container">
+      <h5 class="fw-bold">Nos catégories</h5>
+      <div class="categories-grid">
+        <div v-for="(category, index) in filteredCategories" :key="index" class="category-item" @click="navigateToCategory(category.name)">
+          <div class="category-circle">
+            <img :src="category.icon" :alt="category.name" class="categoryimg img-fluid" />
           </div>
-          {{ category.name }}
+          <p class="category-name">{{ category.name }}</p>
         </div>
       </div>
     </div>
@@ -56,108 +35,209 @@
 
 <script>
 import fruit from "../assets/Categories/fruit.png";
-import veggies from "../assets/Categories/vegetable.png";
 import meat from "../assets/Categories/meat.png";
 import fish from "../assets/Categories/fish.png";
-// import epices from "../assets/Categories/sauces.png";
-// import diaries from "../assets/Categories/dairy-products.png";
-// import frozen from "../assets/Categories/frozen.png";
+import diaries from "../assets/Categories/dairy-products.png";
+import frozen from "../assets/Categories/frozen.png";
 
 export default {
   name: "HomePage",
   data() {
     return {
-      searchQuery: "",
-      
-     categories: [
-        { name: "Fruits", icon:  fruit },
-        { name: "Légumes", icon: veggies },
-        { name: "Viandes", icon:  meat},
+      searchQuery: "", // Modèle pour la recherche
+      categories: [
+        { name: "Fruits", icon: fruit },
+        { name: "Viandes", icon: meat },
         { name: "Poissons", icon: fish },
-        // { name: "Epicerie", icon: epices},
-        // { name: "Crèmerie", icon: diaries },
-        // { name: "Surgelés", icon: frozen },
+        { name: "Crèmerie", icon: diaries },
+        { name: "Surgelés", icon: frozen },
       ],
+      filteredCategories: [] // Tableau pour les catégories filtrées
     };
   },
+  created() {
+    // Initialiser filteredCategories avec toutes les catégories au départ
+    this.filteredCategories = this.categories;
+  },
   methods: {
-    onSearch() {
-      this.$emit("search", this.searchQuery);
+    // Méthode de recherche
+    search() {
+      this.filterCategories(); 
     },
+    filterCategories() {
+      const query = this.searchQuery.toLowerCase().trim(); 
+      if (query === "") {
+        this.filteredCategories = this.categories; 
+      } else {
+        this.filteredCategories = this.categories.filter(category =>
+          category.name.toLowerCase().includes(query) 
+        );
+      }
+    },
+    navigateToCategory(categoryName) {
+      this.$router.push({ name: 'ViewCategorie', params: { category: categoryName } });
+    }
   },
 };
 </script>
 
 <style>
+/* Mise en page de la page d'accueil */
+.container.home-page {
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Icônes localisation et panier */
+.location-and-basket {
+  margin-top: 10px;
+}
+
+.location-icon {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.basket-logo {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Barre de recherche améliorée */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  border-radius: 25px;
+  padding: 5px 10px;
+  background-color: #fff;
+  margin-bottom: 1%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 800px;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  width: 80%;
+}
+
+.search-button {
+  background-color: #008080;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.search-button:hover {
+  background-color: #006666;
+}
+
+/* Grille des catégories avec plus d'espace */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.category-item {
+  text-align: center;
+  cursor: pointer;
+}
+
 .category-circle {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   background-color: #0a2850;
   border-radius: 50%;
-  /* display: flex; */
+  display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
 }
 
-.category-circle .categoryimg {
-  width: 50px;
-  height: 50px;
+.category-circle:hover {
+  transform: scale(1.1);
+}
+
+.categoryimg {
+  width: 70px;
+  height: 70px;
   object-fit: contain;
 }
-.town-location {
-  margin-top: 2%;
-}
-.basket-only {
-  margin-top: 2% !important;
-}
-.basket-logo {
-  /* position: relative; */
-  margin-left: 50%;
-  /* border: 7px 0 0 7px; */
-  height: 10% !important;
-  width: 30% !important;
-  border-width: 1px !important;
-}
-.search_bar {
-  align-content: center !important;
-  margin-top: -1% !important;
-  max-width: 1000px;
-  margin: auto;
-  border-right: none !important;
+
+.category-name {
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 5px;
+  cursor: pointer;
 }
 
-.location {
-  margin-left: 8% !important;
+/* Responsivité */
+@media screen and (max-width: 991px) {
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur les écrans moyens */
+  }
 }
 
-.town {
-  margin-left: 11%;
-  margin-top: -3.5%;
-}
+@media screen and (max-width: 767px) {
+  .categories-grid {
+    grid-template-columns: 1fr; /* 1 colonne sur les petits écrans */
+    gap: 30px; /* Réduit l'espacement entre les éléments */
+  }
 
-.icon {
-  background-color: white;
-  border: 10%;
-  border: 1px solid #ced4da;
-  border-right: none !important;
-  border-radius: 5px 0 0 5px;
-  padding: 6px 12px;
-}
+  .category-circle {
+    width: 100px;
+    height: 100px; /* Réduit la taille des cercles pour les petits écrans */
+  }
 
-.logo-agro {
-  margin-top: -4%;
-}
-.form-control {
-  border-radius: 0 5px 5px 0;
-}
+  .categoryimg {
+    width: 50px;
+    height: 50px; /* Réduit la taille de l'icône des catégories */
+  }
 
-.home-page {
-  background-color: white !important;
-}
+  .category-name {
+    font-size: 14px; /* Ajuste la taille du texte pour les petits écrans */
+  }
 
-.location-and-basket {
-  margin-top: -5%;
-  margin-right: 10% !important;
+  .search-bar {
+    width: 100%; /* Prend toute la largeur sur les petits écrans */
+    max-width: none;
+    margin-top: 50px; /* Ajuster la marge pour les petits écrans */
+  }
+
+  .search-bar input {
+    width: 70%; /* Réduit la largeur du champ de recherche sur les petits écrans */
+  }
+
+  .search-button {
+    padding: 8px;
+  }
+
+  .location-and-basket {
+    flex-direction: column; /* Empile les éléments sur les petits écrans */
+    align-items: center;
+  }
+
+  .location-icon {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .basket-logo {
+    font-size: 20px;
+    margin-top: 10px; /* Espacement entre le panier et la localisation */
+  }
 }
 </style>
