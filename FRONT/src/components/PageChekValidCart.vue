@@ -38,6 +38,8 @@
   </template>
   
   <script>
+  import axios from "axios";
+
   export default {
     data() {
       return {
@@ -49,21 +51,17 @@
       };
     },
     methods: {
-      async submitBankForm() {
-        try {
-          const response = await fetch("https://ton-backend.com/api/bank", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(this.bankData)
-          });
-  
-          if (!response.ok) throw new Error("Échec de l'envoi des données");
-  
-          this.message = "Données envoyées avec succès !";
-        } catch (error) {
-          this.message = "Erreur lors de l'envoi des données.";
-        }
+        async submitBankForm() {
+      try {
+        const response = await axios.post("https://ton-backend.com/api/bank", this.bankData, {
+          headers: { "Content-Type": "application/json" }
+        });
+
+        this.message = "Données envoyées avec succès !";
+      } catch (error) {
+        this.message = "Erreur lors de l'envoi des données.";
       }
+    }
     }
   };
   </script>
