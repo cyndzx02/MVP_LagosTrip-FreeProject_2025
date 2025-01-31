@@ -7,16 +7,22 @@ import PanierView from './components/PanierView.vue'
 import RegisterPage from './components/Register.vue'
 import LoginPage from './components/LoginPage.vue'
 import HomePage from './components/Home.vue'
+import PageChekValidCart from './components/PageChekValidCart.vue'
+import TransferPage from './components/TransferPage.vue'
+
 const routes = [
-  { path: '/Paiement', component:  Paiyement },
-  { path: '/ResumeCommand', component: ResumeCommand },
-  { path: '/ViewCategorie', component: ViewCategorie },
-  { path: '/SpecifiqueFood', component: SpecifiqueFood },
-  { path: '/PanierView', component: PanierView },
-  { path: '/PanierView', component: PanierView },
+  { path: '/Paiement', component:  Paiyement, name: 'Paiement' },
+  { path: '/ResumeCommand', component: ResumeCommand, name: 'ResumeCommand' },
+  {  path: '/ViewCategorie/:category', name: 'ViewCategorie', component: ViewCategorie }, // Route dynamique pour la catégorie
+  { path: '/SpecifiqueFood/:foodName', name: 'SpecifiqueFood',component: SpecifiqueFood },
+  { path: '/PanierView', component: PanierView ,name: 'Panier'},
+  // { path: '/PanierView', component: PanierView },
   { path: '/login', component: LoginPage },
   { path: '/home', component: HomePage },
   { path: '/register', component: RegisterPage },
+  { path: '/PageChekValidCart', component: PageChekValidCart},
+  { path: '/TransferPage', component: TransferPage},
+
 
 ]
 
