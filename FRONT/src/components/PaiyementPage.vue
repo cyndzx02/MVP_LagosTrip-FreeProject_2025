@@ -38,7 +38,8 @@
           <input type="tel" id="phone" v-model="location.phone" required placeholder="Entrez votre numéro de téléphone" />
         </div>
 
-        <button class="btn" type="submit">Suivant</button>
+        <button class="btn" type="submit" @click="this.$router.push({ name: 'ResumeCommand'});
+">Suivant</button>
       </section>
     </form>
   </div>
