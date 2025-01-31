@@ -5,6 +5,8 @@ const app = express();
 const port = process.env.PORT || 3000; // Ajout d'un port par défaut
 const userRoutes = require('./routes/API/routes_query'); 
 const { generateToken } = require('./routes/API/service');
+const fundTransferRoutes = require('./routes/API/fundTransfer'); // Nouvelle route
+const transferRoutes = require('./routes/API/transfers');
 
 app.use(cors());
 app.use(express.json());
@@ -16,6 +18,7 @@ app.post('/info', (req, res) => {
 });
 
 app.use('/api', userRoutes);
+app.use('/api', transferRoutes); // Routes de transfert
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
