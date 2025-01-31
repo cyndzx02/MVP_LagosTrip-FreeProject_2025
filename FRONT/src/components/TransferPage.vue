@@ -112,70 +112,73 @@
   </template>
   
   <script>
-  export default {
-    data() {
-      return {
-        currentStep: 0,
-        steps: [1, 2, 3, 4, 5],
-        message: "",
-        formData: {
-          transferCode: "",
-          mac: "",
-          termination: {
-            amount: "",
-            accountReceivable: {
-              accountNumber: "",
-              accountType: ""
-            },
-            entityCode: "",
-            currencyCode: "",
-            paymentMethodCode: "",
-            countryCode: ""
+  import axios from "axios";
+
+export default {
+  data() {
+    return {
+      currentStep: 0,
+      steps: [1, 2, 3, 4, 5],
+      message: "",
+      formData: {
+        transferCode: "",
+        mac: "",
+        termination: {
+          amount: "",
+          accountReceivable: {
+            accountNumber: "",
+            accountType: ""
           },
-          sender: {
-            phone: "",
-            email: "",
-            lastname: "",
-            othernames: ""
-          },
-          initiatingEntityCode: "",
-          initiation: {
-            amount: "",
-            currencyCode: "",
-            paymentMethodCode: "",
-            channel: ""
-          },
-          beneficiary: {
-            lastname: "",
-            othernames: ""
-          }
-        }
-      };
-    },
-    methods: {
-      nextStep() {
-        if (this.currentStep < this.steps.length - 1) this.currentStep++;
-      },
-      prevStep() {
-        if (this.currentStep > 0) this.currentStep--;
-      },
-      async submitForm() {
-        try {
-          const response = await fetch("https://ton-backend.com/api/transfer", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(this.formData)
-          });
-  
-          if (!response.ok) throw new Error("Échec de l'envoi des données");
-  
-          this.message = "Transfert réussi !";
-        } catch (error) {
-          this.message = "Erreur lors du transfert.";
+          entityCode: "",
+          currencyCode: "",
+          paymentMethodCode: "",
+          countryCode: ""
+        },
+        sender: {
+          phone: "",
+          email: "",
+          lastname: "",
+          othernames: ""
+        },
+        initiatingEntityCode: "",
+        initiation: {
+          amount: "",
+          currencyCode: "",
+          paymentMethodCode: "",
+          channel: ""
+        },
+        beneficiary: {
+          lastname: "",
+          othernames: ""
         }
       }
+    };
+  },
+  methods: {
+    nextStep() {
+      if (this.currentStep < this.steps.length - 1) this.currentStep++;
+    },
+    prevStep() {
+      if (this.currentStep > 0) this.currentStep--;
+    },
+    async submitForm() {
+      try {
+        const response = await axios.post(
+          "https://ton-backend.com/api/transfer",
+          this.formData,
+          {
+            headers: { "Content-Type": "application/json" }
+          }
+        );
+
+        this.message = "Transfert réussi !";
+      } catch (error) {
+        this.message = "Erreur lors du transfert.";
+      }
     }
-  };
+  }
+};
+
   </script>
   
   <style scoped>
