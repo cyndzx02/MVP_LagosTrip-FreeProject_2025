@@ -3,8 +3,10 @@
       <div class="nav-container">
         <h1 class="logo">MonShop</h1>
         <ul class="nav-links">
-          <li><router-link to="/">Accueil</router-link></li>
-          <li><router-link to="/cart">Panier</router-link></li>
+          <li><router-link to="/home">Accueil</router-link></li>
+          <li><router-link to="/PanierView">Panier</router-link></li>
+          <li><router-link to="/Paiement">Paiyement</router-link></li>
+
         </ul>
       </div>
     </nav>
