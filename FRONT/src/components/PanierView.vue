@@ -80,7 +80,7 @@ export default {
 };
 </script>
 
-  <style scoped>
+<style scoped>
   /* Style global de la page */
   .cart-page {
     display: flex;
@@ -190,5 +190,5 @@ export default {
     font-size: 18px;
     color: #888;
   }
-  </style>
+</style>
   
