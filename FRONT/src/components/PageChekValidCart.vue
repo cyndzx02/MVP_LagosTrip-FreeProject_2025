@@ -1,3 +1,4 @@
+
 <template>
     <div class="container">
       <form @submit.prevent="submitBankForm" class="form-container">
@@ -35,11 +36,11 @@
         <p v-if="message" class="response-message">{{ message }}</p>
       </form>
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
   import axios from "axios";
-
+/* eslint-disable */
   export default {
     data() {
       return {
@@ -64,9 +65,9 @@
     }
     }
   };
-  </script>
+</script>
   
-  <style scoped>
+<style scoped>
   /* Réutilisation du style du premier formulaire */
   .container {
     padding: 20px;
@@ -113,5 +114,5 @@
   .btn:hover {
     background-color: #006666;
   }
-  </style>
+</style>
   

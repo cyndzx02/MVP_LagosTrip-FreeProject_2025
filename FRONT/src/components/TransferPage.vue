@@ -109,10 +109,10 @@
         <p v-if="message" class="response-message">{{ message }}</p>
       </form>
     </div>
-  </template>
+</template>
   
-  <script>
-  import axios from "axios";
+<script>
+import axios from "axios";
 
 export default {
   data() {
@@ -179,9 +179,9 @@ export default {
   }
 };
 
-  </script>
+</script>
   
-  <style scoped>
+<style scoped>
   /* Réutilisation du style du premier formulaire */
   .container {
     padding: 20px;
@@ -218,7 +218,7 @@ export default {
   
   .btn {
     padding: 10px 20px;
-    background-color: #008080;
+    background-color: #0a2850;
     color: white;
     border: none;
     border-radius: 5px;
@@ -226,7 +226,7 @@ export default {
   }
   
   .btn:hover {
-    background-color: #006666;
+    background-color: #0a2850;
   }
   .navigation-buttons button{
     padding: 10px;
@@ -246,6 +246,6 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s;
   }
-  </style>
+</style>
   
   

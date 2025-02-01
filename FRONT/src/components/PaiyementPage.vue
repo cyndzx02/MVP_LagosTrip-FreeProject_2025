@@ -4,7 +4,9 @@
     <form @submit.prevent="submitForm" class="form-container">
 
       <header>
-        <i class="fas fa-arrow-left"></i>
+        <router-link class="arrow-color" to="/home"> 
+          <i class="fas fa-arrow-left arrow-color"></i>
+        </router-link>
         <h2>Programme ta commande</h2>
       </header>
 
@@ -38,7 +40,7 @@
           <input type="tel" id="phone" v-model="location.phone" required placeholder="Entrez votre numéro de téléphone" />
         </div>
 
-        <button class="btn" type="submit" @click="this.$router.push({ name: 'ResumeCommand'});
+        <button class="btn rounded-lg" type="submit" @click="this.$router.push({ name: 'ResumeCommand'});
 ">Suivant</button>
       </section>
     </form>
@@ -76,6 +78,11 @@ export default {
   background-color: #f8f8f8;
   padding: 20px;
   box-sizing: border-box;
+}
+.arrow-color{
+  position: inherit;
+  color: black;
+  margin-right: 5%;
 }
 
 /* Formulaire */
@@ -119,12 +126,12 @@ header {
 }
 
 .step.active {
-  background-color: #008080;
+  background-color: #539337;
   color: white;
 }
 
 .step:hover {
-  background-color: #006666;
+  background-color: #125858;
   color: white;
 }
 
@@ -132,7 +139,7 @@ header {
   width: 90%;
   border: none;
   height: 2px;
-  background: linear-gradient(to right, #008080, #00b3b3, #008080);
+  background: linear-gradient(to right, #0a2850, #0a2850, #008080);
 }
 
 .delivery-info h3 {
@@ -149,7 +156,7 @@ header {
 }
 
 label {
-  font-size: 16px; /* Plus grande taille de texte pour les labels */
+  font-size: 16px;
   font-weight: bold;
 }
 
@@ -171,7 +178,7 @@ input[type="tel"] {
 .btn {
   padding: 14px;
   width: 100%;
-  background-color: #008080;
+  background-color: #0a2850;
   color: white;
   border-radius: 5px;
   text-align: center;
@@ -182,7 +189,7 @@ input[type="tel"] {
 }
 
 .btn:hover {
-  background-color: #006666;
+  background-color: #0a2850;
 }
 
 h3 i {

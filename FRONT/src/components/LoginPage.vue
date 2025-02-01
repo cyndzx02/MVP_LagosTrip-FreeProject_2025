@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row login-row">
     <div class="col-md-6 offset-md-3">
       <div class="">
         <form class="form-login" @submit.prevent="handleSubmit">
@@ -19,11 +19,10 @@
           </div>
 
           <div class="my-3">
-            <button type="submit" class="btn btn-primary pill login-button">Login</button>
+            <button type="submit" class="btn rounded-lg pill login-button">Login</button>
           </div>
         </form>
       </div>
-      <!-- Login page -->
     </div>
   </div>
 </template>
@@ -59,22 +58,28 @@ export default {
 
 /* .login-box{
   /* background-color: black !important; */
-
+.login-row {
+  background-color: #f0f0f0;
+}
 .login-button{
   margin-left: 0 !important;
-  font-size: 70%;
-  width: 50% !important;
+  font-size: 20px;
+  width: 100% !important;
   align-self: center;
+  margin: 4px 2px;
+  cursor: pointer !important;
+  border-radius: 35px !important;
   background-color: rgb(6, 6, 66);
 }
 
 .form-login {
   max-width: 420px !important;
   margin: 30px auto !important;
-  background: rgb(207, 203, 203) !important;
+  background: rgb(255, 255, 255) !important;
   text-align: left !important;
   padding: 40px !important;
   border-radius: 10px !important;
+  
   /* margin-top: 5%; */
 }
 .all-label {
@@ -95,8 +100,5 @@ export default {
   border-bottom: 1px solid #ddd;
   color: #555;
 }
-/* 
-#app {
-  background-color: #beeba0;
-} */
+
 </style>

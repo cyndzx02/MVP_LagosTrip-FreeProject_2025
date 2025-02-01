@@ -24,7 +24,7 @@
           </div>
 
           <div class="my-3">
-            <button type="submit" class="register-btn btn-primary">Register</button>
+            <button type="submit" class="btn register-btn pill rounded-lg">Register</button>
           </div>
         </form>
       </div>
@@ -69,7 +69,8 @@ export default {
 <style>
 /* { */
 .register-row {
-  background-color: #beeba0;
+   /* height: 50%;  */
+  background-color: #f0f0f0;
 }
 .register {
   margin-left: 150px !important;
@@ -81,19 +82,24 @@ export default {
   font-weight: bold;
 }
 .register-btn {
-  margin-left: 0px !important;
-  font-size: 70%;
+  cursor: pointer !important;
+  border-radius: 35px !important;
+  margin-left: 0 !important;
+  font-size: 20px;
+  width: 100% !important;
+  align-self: center;
   background-color: rgb(6, 6, 66);
 }
 
 .form-register {
+ 
   max-width: 420px;
   margin: 30px auto;
   background: white;
   text-align: left;
   padding: 40px;
   border-radius: 10px;
-  /* margin-top: 5%; */
+
 }
 .label-register {
   color: #aaa;
@@ -114,8 +120,5 @@ export default {
   color: #555;
 }
 
-/* #app {
-    background-color: #beeba0;
-  } */
 </style>
 <!--  -->

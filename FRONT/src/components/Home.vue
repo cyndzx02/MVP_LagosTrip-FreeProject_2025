@@ -1,6 +1,5 @@
 <template>
-  <div class="container home-page text-center">
-    <!-- Localisation et panier -->
+  <div class="container all-color home-page text-center">
     <div class="row location-and-basket d-flex justify-content-between align-items-center px-3 mt-4">
       <div class="location d-flex align-items-center">
         <i class="bi bi-geo-alt-fill location-icon"></i>
@@ -10,21 +9,21 @@
       </div>
     </div>
 
-    <!-- Barre de recherche améliorée -->
-    <div class="search-bar">
-      <input type="text" placeholder="Rechercher..." v-model="searchQuery" @input="filterCategories"/>
+    <div class="search-bar all-color">
+      <input type="text" placeholder="De quoi avez-vous besoin aujourd'hui ?" v-model="searchQuery" @input="filterCategories"/>
       <button class="search-button" @click="search">
-        <i class="fas fa-search"></i> <!-- Icône de recherche -->
+        <i class="fas fa-search"></i>
       </button>
     </div>
 
-    <!-- Section catégories -->
-    <div class="mt-5 container">
-      <h5 class="fw-bold">Nos catégories</h5>
+    <div class="grid-container all-color">
+      <h5 class="fw-bold our-category">Nos catégories</h5>
       <div class="categories-grid">
         <div v-for="(category, index) in filteredCategories" :key="index" class="category-item" @click="navigateToCategory(category.name)">
           <div class="category-circle">
-            <img :src="category.icon" :alt="category.name" class="categoryimg img-fluid" />
+            <img :src="category.icon" 
+                 :alt="category.name" 
+                 class="categoryimg img-fluid" />
           </div>
           <p class="category-name">{{ category.name }}</p>
         </div>
@@ -44,13 +43,15 @@ export default {
   name: "HomePage",
   data() {
     return {
-      searchQuery: "", // Modèle pour la recherche
+      searchQuery: "",
       categories: [
         { name: "Fruits", icon: fruit },
         { name: "Viandes", icon: meat },
         { name: "Poissons", icon: fish },
         { name: "Crèmerie", icon: diaries },
         { name: "Surgelés", icon: frozen },
+        // {name: "", icon: frozen},
+
       ],
       filteredCategories: [] // Tableau pour les catégories filtrées
     };
@@ -83,13 +84,21 @@ export default {
 
 <style>
 /* Mise en page de la page d'accueil */
+.our-category{
+  padding-bottom: 2%;
+  
+}
 .container.home-page {
-  padding: 20px;
-  margin-top: 20px;
+  padding: 10px;
+  margin-top: 15px;
+}
+
+.all-color{
+  background-color: #fff;
 }
 
 /* Icônes localisation et panier */
-.location-and-basket {
+/* .location-and-basket {
   margin-top: 10px;
 }
 
@@ -101,18 +110,18 @@ export default {
 .basket-logo {
   font-size: 24px;
   cursor: pointer;
-}
+} */
 
 /* Barre de recherche améliorée */
 .search-bar {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
+  /* margin-top: 5px; */
   border-radius: 25px;
-  padding: 5px 10px;
+  /* padding: 5px 10px; */
   background-color: #fff;
-  margin-bottom: 1%;
+  /* margin-bottom: 1%; */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 800px;
@@ -121,13 +130,13 @@ export default {
 .search-bar input {
   border: none;
   outline: none;
-  padding: 10px;
+  /* padding: 5px; */
   font-size: 16px;
   width: 80%;
 }
 
 .search-button {
-  background-color: #008080;
+  background-color: #0a2850;
   border: none;
   color: white;
   padding: 10px;
@@ -137,7 +146,7 @@ export default {
 }
 
 .search-button:hover {
-  background-color: #006666;
+  background-color: #0a2850;
 }
 
 /* Grille des catégories avec plus d'espace */
@@ -146,23 +155,25 @@ export default {
   grid-template-columns: repeat(3, 1fr);
   gap: 60px;
   justify-content: center;
-  margin-top: 10px;
+  /* margin-top: 5px; */
 }
 
 .category-item {
+  /* margin-top: -12px; */
   text-align: center;
   cursor: pointer;
 }
 
 .category-circle {
-  width: 120px;
-  height: 120px;
+  width: 90px;
+  height: 90px;
   background-color: #0a2850;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  /* margin-top: 100%; */
+  /* margin: auto; */
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
@@ -178,9 +189,9 @@ export default {
 }
 
 .category-name {
-  font-size: 15px;
+  font-size: 15;
   font-weight: bold;
-  margin-top: 5px;
+  /* margin-top: 5px; */
   cursor: pointer;
 }
 
