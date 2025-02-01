@@ -9,6 +9,7 @@ import LoginPage from './components/LoginPage.vue'
 import HomePage from './components/Home.vue'
 import PageChekValidCart from './components/PageChekValidCart.vue'
 import TransferPage from './components/TransferPage.vue'
+import FactureView from './components/FactureView.vue'
 
 const routes = [
   { path: '/Paiement', component:  Paiyement, name: 'Paiement' },
@@ -22,6 +23,7 @@ const routes = [
   { path: '/register', component: RegisterPage },
   { path: '/PageChekValidCart', component: PageChekValidCart},
   { path: '/TransferPage', component: TransferPage, name: 'TransferPage'},
+  { path: '/FactureView', component: FactureView, name: 'FactureView'},
 
 
 ]
