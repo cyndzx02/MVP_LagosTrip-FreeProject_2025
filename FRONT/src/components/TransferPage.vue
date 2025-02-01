@@ -22,12 +22,12 @@
         <section v-if="currentStep === 0">
           <div class="input-group">
             <label for="transferCode">Code de Transfert</label>
-            <input type="text" id="transferCode" v-model="formData.transferCode" required>
+            <input type="text" id="transferCode" v-model="transferDetails.transferCode" required>
           </div>
   
           <div class="input-group">
             <label for="mac">MAC</label>
-            <input type="text" id="mac" v-model="formData.mac" required>
+            <input type="text" id="mac" v-model="transferDetails.mac" required>
           </div>
         </section>
   
@@ -35,17 +35,17 @@
         <section v-if="currentStep === 1">
           <div class="input-group">
             <label for="amount">Montant</label>
-            <input type="text" id="amount" v-model="formData.termination.amount" required>
+            <input type="text" id="amount" v-model="transferDetails.termination.amount" required>
           </div>
   
           <div class="input-group">
             <label for="accountNumber">Numéro du Compte</label>
-            <input type="text" id="accountNumber" v-model="formData.termination.accountReceivable.accountNumber" required>
+            <input type="text" id="accountNumber" v-model="transferDetails.termination.accountReceivable.accountNumber" required>
           </div>
   
           <div class="input-group">
             <label for="accountType">Type du Compte</label>
-            <input type="text" id="accountType" v-model="formData.termination.accountReceivable.accountType" required>
+            <input type="text" id="accountType" v-model="transferDetails.termination.accountReceivable.accountType" required>
           </div>
         </section>
   
@@ -53,22 +53,22 @@
         <section v-if="currentStep === 2">
           <div class="input-group">
             <label for="phone">Téléphone</label>
-            <input type="text" id="phone" v-model="formData.sender.phone" required>
+            <input type="text" id="phone" v-model="transferDetails.sender.phone" required>
           </div>
   
           <div class="input-group">
             <label for="email">Email</label>
-            <input type="email" id="email" v-model="formData.sender.email" required>
+            <input type="email" id="email" v-model="transferDetails.sender.email" required>
           </div>
   
           <div class="input-group">
             <label for="lastname">Nom</label>
-            <input type="text" id="lastname" v-model="formData.sender.lastname" required>
+            <input type="text" id="lastname" v-model="transferDetails.sender.lastname" required>
           </div>
   
           <div class="input-group">
             <label for="othernames">Prénoms</label>
-            <input type="text" id="othernames" v-model="formData.sender.othernames" required>
+            <input type="text" id="othernames" v-model="transferDetails.sender.othernames" required>
           </div>
         </section>
   
@@ -76,12 +76,12 @@
         <section v-if="currentStep === 3">
           <div class="input-group">
             <label for="initiatingEntityCode">Code d'Entité</label>
-            <input type="text" id="initiatingEntityCode" v-model="formData.initiatingEntityCode" required>
+            <input type="text" id="initiatingEntityCode" v-model="transferDetails.initiatingEntityCode" required>
           </div>
   
           <div class="input-group">
             <label for="channel">Canal</label>
-            <input type="text" id="channel" v-model="formData.initiation.channel" required>
+            <input type="text" id="channel" v-model="transferDetails.initiation.channel" required>
           </div>
         </section>
   
@@ -89,12 +89,12 @@
         <section v-if="currentStep === 4">
           <div class="input-group">
             <label for="beneficiaryLastName">Nom du Bénéficiaire</label>
-            <input type="text" id="beneficiaryLastName" v-model="formData.beneficiary.lastname" required>
+            <input type="text" id="beneficiaryLastName" v-model="transferDetails.beneficiary.lastname" required>
           </div>
   
           <div class="input-group">
             <label for="beneficiaryOtherNames">Prénoms</label>
-            <input type="text" id="beneficiaryOtherNames" v-model="formData.beneficiary.othernames" required>
+            <input type="text" id="beneficiaryOtherNames" v-model="transferDetails.beneficiary.othernames" required>
           </div>
         </section>
   
@@ -120,7 +120,7 @@ export default {
       currentStep: 0,
       steps: [1, 2, 3, 4, 5],
       message: "",
-      formData: {
+      transferDetails: {
         transferCode: "",
         mac: "",
         termination: {
@@ -162,15 +162,16 @@ export default {
       if (this.currentStep > 0) this.currentStep--;
     },
     async submitForm() {
+      console.log("Payload envoyé:", JSON.stringify(this.transferDetails, null, 2));
       try {
         const response = await axios.post(
-          "https://ton-backend.com/api/transfer",
-          this.formData,
+          "http://localhost:3500/api/transfer",
+          this.transferDetails,
           {
             headers: { "Content-Type": "application/json" }
           }
         );
-
+        console.log(response)
         this.message = "Transfert réussi !";
       } catch (error) {
         this.message = "Erreur lors du transfert.";
