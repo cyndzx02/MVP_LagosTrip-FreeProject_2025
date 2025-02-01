@@ -47,7 +47,7 @@
         this.invoice = null;
   
         try {
-          const response = await axios.post("http://localhost:3500/api/invoice", this.requestData); // Remplace par l'URL de ton API
+          const response = await axios.post("http://localhost:3500/api/createInvoice", this.requestData); // Remplace par l'URL de ton API
           this.invoice = response.data;
         } catch (error) {
           this.errorMessage = "Erreur lors de la récupération de la facture.";
