@@ -129,10 +129,10 @@ export default {
             accountNumber: "",
             accountType: ""
           },
-          entityCode: "",
-          currencyCode: "",
-          paymentMethodCode: "",
-          countryCode: ""
+          entityCode: "044",
+          currencyCode: "566",
+          paymentMethodCode: "AC",
+          countryCode: "NG"
         },
         sender: {
           phone: "",
@@ -142,9 +142,9 @@ export default {
         },
         initiatingEntityCode: "",
         initiation: {
-          amount: "",
-          currencyCode: "",
-          paymentMethodCode: "",
+          amount: "100000",
+          currencyCode: "566",
+          paymentMethodCode: "CA",
           channel: ""
         },
         beneficiary: {
