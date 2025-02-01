@@ -21,7 +21,7 @@ const routes = [
   { path: '/home', component: HomePage },
   { path: '/register', component: RegisterPage },
   { path: '/PageChekValidCart', component: PageChekValidCart},
-  { path: '/TransferPage', component: TransferPage},
+  { path: '/TransferPage', component: TransferPage, name: 'TransferPage'},
 
 
 ]

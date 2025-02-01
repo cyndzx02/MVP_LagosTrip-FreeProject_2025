@@ -69,7 +69,7 @@ export default {
       localStorage.setItem('cart', JSON.stringify(this.cartItems));
     },
     checkout() {
-      alert("Passer à la caisse");
+      this.$router.push({ name: 'Paiement' });
     },
   },
   watch: {

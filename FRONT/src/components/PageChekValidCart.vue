@@ -20,12 +20,12 @@
         <section class="bank-info">
           <div class="input-group">
             <label for="accountId">ID du Compte</label>
-            <input type="text" id="accountId" v-model="bankData.accountId" required>
+            <input type="text" id="accountId" v-model="cardDetails.accountId" required>
           </div>
   
           <div class="input-group">
             <label for="bankCode">Code Banque</label>
-            <input type="text" id="bankCode" v-model="bankData.bankCode" required>
+            <input type="text" id="bankCode" v-model="cardDetails.bankCode" required>
           </div>
         </section>
   
@@ -43,7 +43,7 @@
   export default {
     data() {
       return {
-        bankData: {
+        cardDetails: {
           accountId: "",
           bankCode: ""
         },
@@ -51,17 +51,20 @@
       };
     },
     methods: {
-        async submitBankForm() {
-      try {
-        const response = await axios.post("https://ton-backend.com/api/bank", this.bankData, {
-          headers: { "Content-Type": "application/json" }
-        });
+      async submitBankForm() {
+  try {
+    const response = await axios.get("http://localhost:3500/api/check-card", {
+      params: this.cardDetails,  // Passer les données dans params
+      headers: { "Content-Type": "application/json" }
+    });
+    console.log(response);
+    this.message = "Données envoyées avec succès !";
+    this.$router.push({ name: 'TransferPage' });
+  } catch (error) {
+    this.message = "Erreur lors de l'envoi des données.";
+  }
+}
 
-        this.message = "Données envoyées avec succès !";
-      } catch (error) {
-        this.message = "Erreur lors de l'envoi des données.";
-      }
-    }
     }
   };
   </script>
