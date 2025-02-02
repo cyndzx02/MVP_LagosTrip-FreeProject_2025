@@ -21,7 +21,7 @@ const routes = [
   { path: '/login', component: LoginPage },
   { path: '/home', component: HomePage },
   { path: '/register', component: RegisterPage },
-  { path: '/PageChekValidCart', component: PageChekValidCart},
+  { path: '/PageChekValidCart', component: PageChekValidCart, name: 'PageChekValidCart'},
   { path: '/TransferPage', component: TransferPage, name: 'TransferPage'},
   { path: '/FactureView', component: FactureView, name: 'FactureView'},
 
