@@ -8,4 +8,6 @@ Agronova developer documentation
    Contents/Overview
    Contents/Usage
    Contents/Installation
+   Contents/Competitivity
+   Contents/Business
 

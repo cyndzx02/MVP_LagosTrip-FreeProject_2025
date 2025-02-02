@@ -59,6 +59,8 @@
     });
     console.log(response);
     this.message = "Données envoyées avec succès !";
+     // Afficher une alerte avec la réponse du serveur
+    //  alert(`cart validé au nom de : ${JSON.stringify(response.data.AccountName)}`);
     this.$router.push({ name: 'TransferPage' });
   } catch (error) {
     this.message = "Erreur lors de l'envoi des données.";
