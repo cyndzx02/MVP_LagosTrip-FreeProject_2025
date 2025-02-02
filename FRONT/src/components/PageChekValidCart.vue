@@ -36,9 +36,10 @@
       </form>
     </div>
   </template>
+  
   <script>
   import axios from "axios";
-  
+
   export default {
     data() {
       return {
@@ -51,31 +52,24 @@
     },
     methods: {
       async submitBankForm() {
-        try {
-          const response = await axios.get("http://localhost:3500/api/check-card", {
-            params: this.cardDetails,
-            headers: { "Content-Type": "application/json" }
-          });
-  
-          console.log(response);
-          this.message = "Données envoyées avec succès !";
-  
-          // Afficher une alerte avec la réponse du serveur
-          alert(`cart validé au nom de : ${JSON.stringify(response.data.AccountName)}`);
-  
-          // Rediriger vers la page suivante
-          this.$router.push({ name: 'TransferPage' });
-  
-        } catch (error) {
-          console.error("Erreur API :", error.response);
-          this.message = "Erreur lors de l'envoi des données.";
-          alert("Une erreur s'est produite. Vérifiez votre saisie.");
-        }
-      }
+  try {
+    const response = await axios.get("http://localhost:3500/api/check-card", {
+      params: this.cardDetails,  // Passer les données dans params
+      headers: { "Content-Type": "application/json" }
+    });
+    console.log(response);
+    this.message = "Données envoyées avec succès !";
+     // Afficher une alerte avec la réponse du serveur
+    //  alert(`cart validé au nom de : ${JSON.stringify(response.data.AccountName)}`);
+    this.$router.push({ name: 'TransferPage' });
+  } catch (error) {
+    this.message = "Erreur lors de l'envoi des données.";
+  }
+}
+
     }
   };
   </script>
-  
   
   <style scoped>
   /* Réutilisation du style du premier formulaire */
