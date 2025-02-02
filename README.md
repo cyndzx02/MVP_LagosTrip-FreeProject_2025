@@ -17,6 +17,16 @@ cd  MVP_LagosTrip-FreeProject_2025
 Launch the server and the client
 
 ```bash
+cd FRONT
+npm install && npm run serve
+
+// you can check it out on the http adress shown in you terminal
+
+cd agronova_backend
+npm install && npm start
+
+// you can check it out on the http adress shown in you terminal
+
 ```
 
 ## Architecture
