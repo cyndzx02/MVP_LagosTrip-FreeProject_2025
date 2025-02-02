@@ -1,31 +1,34 @@
 <template>
-  <div class="container all-color home-page text-center">
-    <div class="row location-and-basket d-flex justify-content-between align-items-center px-3 mt-4">
-      <div class="location d-flex align-items-center">
-        <i class="bi bi-geo-alt-fill location-icon"></i>
-      </div>
-      <div class="basket">
-        <i class="bi bi-basket2 basket-logo"></i>
-      </div>
-    </div>
-
-    <div class="search-bar all-color">
-      <input type="text" placeholder="De quoi avez-vous besoin aujourd'hui ?" v-model="searchQuery" @input="filterCategories"/>
-      <button class="search-button" @click="search">
+  <div class="container-home all-color home-page text-center">
+    <div class="search-bar-home all-color-home">
+      <input
+        type="text"
+        placeholder="De quoi avez-vous besoin aujourd'hui ?"
+        v-model="searchQuery"
+        @input="filterCategories"
+      />
+      <button class="search-button-home" @click="search">
         <i class="fas fa-search"></i>
       </button>
     </div>
 
-    <div class="grid-container all-color">
-      <h5 class="fw-bold our-category">Nos catégories</h5>
-      <div class="categories-grid">
-        <div v-for="(category, index) in filteredCategories" :key="index" class="category-item" @click="navigateToCategory(category.name)">
-          <div class="category-circle">
-            <img :src="category.icon" 
-                 :alt="category.name" 
-                 class="categoryimg img-fluid" />
+    <div class="grid-container-home all-color-home">
+      <h5 class="fw-bold our-category-home">Nos catégories</h5>
+      <div class="categories-grid-home">
+        <div
+          v-for="(category, index) in filteredCategories"
+          :key="index"
+          class="category-item-home"
+          @click="navigateToCategory(category.name)"
+        >
+          <div class="category-circle-home">
+            <img
+              :src="category.icon"
+              :alt="category.name"
+              class="categoryimg-home img-fluid"
+            />
           </div>
-          <p class="category-name">{{ category.name }}</p>
+          <p class="category-name-home">{{ category.name }}</p>
         </div>
       </div>
     </div>
@@ -37,8 +40,7 @@ import fruit from "../assets/Categories/fruit.png";
 import meat from "../assets/Categories/meat.png";
 import fish from "../assets/Categories/fish.png";
 import diaries from "../assets/Categories/dairy-products.png";
-import frozen from "../assets/Categories/frozen.png";
-
+//import from "..//"
 export default {
   name: "HomePage",
   data() {
@@ -49,85 +51,87 @@ export default {
         { name: "Viandes", icon: meat },
         { name: "Poissons", icon: fish },
         { name: "Crèmerie", icon: diaries },
-        { name: "Surgelés", icon: frozen },
+        // { name: "Surgelés", icon: frozen },
         // {name: "", icon: frozen},
-
       ],
-      filteredCategories: [] // Tableau pour les catégories filtrées
+      filteredCategories: [],
     };
   },
   created() {
-    // Initialiser filteredCategories avec toutes les catégories au départ
     this.filteredCategories = this.categories;
   },
   methods: {
     // Méthode de recherche
     search() {
-      this.filterCategories(); 
+      this.filterCategories();
     },
     filterCategories() {
-      const query = this.searchQuery.toLowerCase().trim(); 
+      const query = this.searchQuery.toLowerCase().trim();
       if (query === "") {
-        this.filteredCategories = this.categories; 
+        this.filteredCategories = this.categories;
       } else {
-        this.filteredCategories = this.categories.filter(category =>
-          category.name.toLowerCase().includes(query) 
+        this.filteredCategories = this.categories.filter((category) =>
+          category.name.toLowerCase().includes(query)
         );
       }
     },
     navigateToCategory(categoryName) {
-      this.$router.push({ name: 'ViewCategorie', params: { category: categoryName } });
-    }
+      this.$router.push({
+        name: "ViewCategorie",
+        params: { category: categoryName },
+      });
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 /* Mise en page de la page d'accueil */
-.our-category{
-  padding-bottom: 2%;
-  
+.our-category-home {
+  /* padding-bottom: 5cm; */
+  margin-top: 5cm;
+  /* background-color: black; */
+  /* padding-top: 4%; */
 }
-.container.home-page {
+.container-home.home-page {
   padding: 10px;
   margin-top: 15px;
 }
 
-.all-color{
+.all-color-home {
   background-color: #fff;
 }
-
-/* Icônes localisation et panier */
-/* .location-and-basket {
-  margin-top: 10px;
-}
-
-.location-icon {
-  font-size: 20px;
-  margin-right: 5px;
-}
-
-.basket-logo {
-  font-size: 24px;
-  cursor: pointer;
-} */
 
 /* Barre de recherche améliorée */
-.search-bar {
-  display: flex;
+.search-bar-home {
+  /* padding: 5px 10px; */
+  /* margin-bottom: 1%; */
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-top: 5px; */
+  margin-top: -50px;
   border-radius: 25px;
-  /* padding: 5px 10px; */
   background-color: #fff;
-  /* margin-bottom: 1%; */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 800px; */
+  margin-top: 6%;
+  position: fixed;
+  z-index: 100%;
+  display: flex;
+  justify-content: center;
+  margin-left: 5cm;
+  align-items: center;
+  border-radius: 25px;
+  padding: 5px 10px;
+  background-color: #fff;
+  margin-bottom: 5%;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 800px;
 }
 
-.search-bar input {
+.search-bar-home input {
   border: none;
   outline: none;
   /* padding: 5px; */
@@ -135,7 +139,7 @@ export default {
   width: 80%;
 }
 
-.search-button {
+.search-button-home {
   background-color: #0a2850;
   border: none;
   color: white;
@@ -145,26 +149,39 @@ export default {
   margin-left: 10px;
 }
 
-.search-button:hover {
+.search-button-home:hover {
   background-color: #0a2850;
 }
 
 /* Grille des catégories avec plus d'espace */
-.categories-grid {
+.categories-grid-home {
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-content: center;
+   */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 60px;
-  justify-content: center;
+  gap: 10px;
+  justify-items: center;
+  /* margin-left: 5cm; */
+  margin-left: 4cm;
+  width: 70%;
+  max-width: 1000px;
+  margin-top: 0.5cm;
+  position: flex;
+  z-index: 15%;
+ 
   /* margin-top: 5px; */
 }
 
-.category-item {
+.category-item-home {
   /* margin-top: -12px; */
   text-align: center;
   cursor: pointer;
 }
 
-.category-circle {
+.category-circle-home {
   width: 90px;
   height: 90px;
   background-color: #0a2850;
@@ -178,17 +195,17 @@ export default {
   transition: transform 0.2s ease-in-out;
 }
 
-.category-circle:hover {
+.category-circle-home:hover {
   transform: scale(1.1);
 }
 
-.categoryimg {
+.categoryimg-home {
   width: 70px;
   height: 70px;
   object-fit: contain;
 }
 
-.category-name {
+.category-name-home {
   font-size: 15;
   font-weight: bold;
   /* margin-top: 5px; */
@@ -197,58 +214,50 @@ export default {
 
 /* Responsivité */
 @media screen and (max-width: 991px) {
-  .categories-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur les écrans moyens */
+  .categories-grid-home {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    );
   }
 }
 
 @media screen and (max-width: 767px) {
   .categories-grid {
-    grid-template-columns: 1fr; /* 1 colonne sur les petits écrans */
-    gap: 30px; /* Réduit l'espacement entre les éléments */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
   }
-
+  .our-category {
+  padding-bottom: 3%;
+  margin-bottom: 5%;
+  }
   .category-circle {
     width: 100px;
-    height: 100px; /* Réduit la taille des cercles pour les petits écrans */
+    height: 100px;
   }
 
   .categoryimg {
     width: 50px;
-    height: 50px; /* Réduit la taille de l'icône des catégories */
+    height: 50px;
   }
 
   .category-name {
-    font-size: 14px; /* Ajuste la taille du texte pour les petits écrans */
+    font-size: 14px;
   }
 
   .search-bar {
-    width: 100%; /* Prend toute la largeur sur les petits écrans */
+    width: 100%;
     max-width: none;
-    margin-top: 50px; /* Ajuster la marge pour les petits écrans */
+    margin-top: -50%;
   }
 
   .search-bar input {
+    /* padding-bottom: 5%; */
     width: 70%; /* Réduit la largeur du champ de recherche sur les petits écrans */
   }
 
   .search-button {
     padding: 8px;
-  }
-
-  .location-and-basket {
-    flex-direction: column; /* Empile les éléments sur les petits écrans */
-    align-items: center;
-  }
-
-  .location-icon {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-
-  .basket-logo {
-    font-size: 20px;
-    margin-top: 10px; /* Espacement entre le panier et la localisation */
   }
 }
 </style>

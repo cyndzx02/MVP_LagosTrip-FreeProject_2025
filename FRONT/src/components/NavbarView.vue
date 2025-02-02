@@ -36,13 +36,16 @@ export default {
 .agro-logo {
   height: 70px !important;
   width: 60px !important;
+  
   /* position: fixed; */
 }
 .navbar {
   /* position: fixed !important; */
   width: auto;
+  width: 100%;
   /* box-shadow: 10px !important; */
-
+  z-index: 1000;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   background-color: #539337;
   padding-bottom: 30px;
   padding: 15px 25px;

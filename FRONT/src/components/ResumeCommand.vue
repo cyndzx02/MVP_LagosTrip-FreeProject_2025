@@ -1,93 +1,81 @@
 <template>
-    <div class="container">
-      
-      <form @submit.prevent="submitForm" class="form-container">
-  
-        <header>
-          <i class="fas fa-arrow-left"></i>
-          <h2> Resumé des informations</h2>
-        </header>
-  
-        <!-- Barre de progression -->
-        <div class="progress-bar">
-          <button class="step">1</button>
-          <button class="step active">2</button>
-          <button class="step">3</button>
-        </div>
-  
-        <!-- Traité horizontal stylisé -->
-        <hr class="progress-separator">
-  
-        <!-- Titre avec icône -->
-       
-        <!-- Informations de livraison -->
-        <section class="delivery-info">
-            <div class="summary-container">
-    <div class="card" @click="toggleSummary">
-      <h3>Résumé de la commande</h3>
-      <p v-if="showSummary">Prix total : {{ totalPrice }} €</p>
-      <p v-if="showSummary">Prix de livraison : {{ deliveryPrice }} €</p>
-    </div>
+  <div class="container-resumeCommand">
+    <form @submit.prevent="submitForm" class="form-container-resumeCommand">
+      <header>
+        <i class="fas fa-arrow-left i_resume"></i>
+        <h2 class="h2_resume">Resumé des informations</h2>
+      </header>
 
-    <div class="card" @click="toggleProducts">
-      <h3>Liste des produits</h3>
-      <p v-if="showProducts">Cliquez pour afficher les détails</p>
-      <ul v-if="showProducts">
-        <li v-for="(product, index) in cartItems" :key="index">
-          {{ product.name }} - {{ product.price }} €
-        </li>
-      </ul>
-    </div>
-    <div class="card" @click="toggleLocationInfo">
-            <h3>Informations de localisation</h3>
-            <p v-if="showLocationInfo">
-              Ville : {{ location.city }}<br>
-              Quartier : {{ location.district }}<br>
+      <!-- Barre de progression -->
+      <div class="progress-bar-resumeCommand">
+        <button class="step-resumeCommand">1</button>
+        <button class="step-resumeCommand active-resumeCommand">2</button>
+        <button class="step-resumeCommand">3</button>
+      </div>
+
+      <!-- Traité horizontal stylisé -->
+      <hr class="progress-separator-resumeCommand" />
+
+      <!-- Titre avec icône -->
+
+      <!-- Informations de livraison -->
+      <section class="delivery-info-resumeCommand">
+        <div class="summary-container-resumeCommand">
+          <div class="card-resumeCommand" @click="toggleSummary">
+            <h3 class="resume-command">Résumé de la commande</h3>
+            <p class="p_resume" v-if="showSummary">Prix total : {{ totalPrice }} €</p>
+            <p class="p_resume" v-if="showSummary">Prix de livraison : {{ deliveryPrice }} €</p>
+          </div>
+
+          <div class="card-resumeCommand" @click="toggleProducts">
+            <h3 class="resume-command">Liste des produits</h3>
+            <p class="p_resume" v-if="showProducts">Cliquez pour afficher les détails</p>
+            <ul v-if="showProducts">
+              <li class="li_resume" v-for="(product, index) in cartItems" :key="index">
+                {{ product.name }} - {{ product.price }} €
+              </li>
+            </ul>
+          </div>
+          <div class="card-resumeCommand" @click="toggleLocationInfo">
+            <h3 class="resume-command">Informations de localisation</h3>
+            <p class="p_resume" v-if="showLocationInfo">
+              Ville : {{ location.city }}<br />
+              Quartier : {{ location.district }}<br />
               Téléphone : {{ location.phone }}
             </p>
           </div>
-
-    
+        </div>
+        <button class="btn-resumeCommand" type="submit">Suivant</button>
+      </section>
+    </form>
   </div>
-          <button class="btn" type="submit">Suivant</button>
-        </section>
-      </form>
-    </div>
-  </template>
-
-
-
-
-
-
-
-
-
+</template>
 
 <script>
 export default {
   data() {
     return {
       // Informations de la commande
-      // totalPrice: 50,  
-      deliveryPrice: 10,  // Exemple de prix de livraison
-      cartItems: JSON.parse(localStorage.getItem('cart')) || [], // S'il n'y a rien, on initialise un tableau vide
+      // totalPrice: 50,
+      deliveryPrice: 10, // Exemple de prix de livraison
+      cartItems: JSON.parse(localStorage.getItem("cart")) || [], // S'il n'y a rien, on initialise un tableau vide
 
       location: {
-        city: 'Paris',
-        district: 'Le Marais',
-        phone: '+33 1 23 45 67 89'
+        city: "Paris",
+        district: "Le Marais",
+        phone: "+33 1 23 45 67 89",
       },
       showSummary: false,
       showProducts: false,
-      showLocationInfo: false
-
+      showLocationInfo: false,
     };
   },
   computed: {
     // Calcul du total du panier
     totalPrice() {
-      return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+      return this.cartItems
+        .reduce((acc, item) => acc + item.price * item.quantity, 0)
+        .toFixed(2);
     },
   },
   methods: {
@@ -99,16 +87,26 @@ export default {
     },
     toggleLocationInfo() {
       this.showLocationInfo = !this.showLocationInfo;
-    }
-  }
+    },
+  },
 };
 </script>
+
 <style scoped>
-.container {
+.container-resumeCommand {
+  /* margin-top: 0.5cm; */
+  /* padding: 20px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 98vh;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8;
   padding: 20px;
+  box-sizing: border-box;
 }
 
-.summary-container {
+.summary-container-resumeCommand {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -118,7 +116,7 @@ export default {
   font-family: Arial, sans-serif;
 }
 
-.card {
+.card-resumeCommand {
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
@@ -128,23 +126,23 @@ export default {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.card h3 {
+.card-resumeCommand .resume-command {
   margin: 0;
   font-size: 20px;
   color: #333;
 }
 
-.card p {
+.card-resumeCommand .p_resume {
   margin: 10px 0;
   font-size: 16px;
 }
 
-.card ul {
+.card-resumeCommand .ul_resume {
   list-style: none;
   padding: 0;
 }
 
-.card li {
+.card-resumeCommand .li_resume {
   font-size: 14px;
   margin: 5px 0;
 }
@@ -156,46 +154,47 @@ export default {
 } */
 
 /* Styles de la barre de progression */
-.progress-bar {
+.progress-bar-resumeCommand {
   display: flex;
   gap: 40px;
   justify-content: center;
 }
 
-.step {
-  width: 40px; 
+.step-resumeCommand {
+  width: 40px;
   height: 40px;
   background-color: #e0e0e0;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px; 
+  font-size: 20px;
   color: black;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.step.active {
+.step-resumeCommand.active-resumeCommand {
   background-color: #008080;
   color: white;
 }
 
-.step:hover {
+.step-resumeCommand:hover {
   background-color: #006666;
   color: white;
 }
 
-.progress-separator {
+.progress-separator-resumeCommand {
   width: 90%;
   border: none;
   height: 2px;
   background: linear-gradient(to right, #008080, #00b3b3, #008080);
 }
 
-.btn {
+.btn-resumeCommand {
   padding: 10px 20px;
-  background-color: #008080;
+  margin-right: 2cm;
+  background-color: rgb(6, 6, 66);
   color: white;
   border: none;
   border-radius: 5px;
@@ -207,37 +206,36 @@ export default {
   background-color: #45a049;
 } */
 
-
 /* Lorsque l'écran est plus petit que 768px */
 @media (max-width: 768px) {
-  .summary-container {
+  .summary-container-resumeCommand {
     padding: 15px;
-    width: 100%; 
+    width: 100%;
   }
 
-  .card h3 {
-    font-size: 18px; 
+  .card-resumeCommand .resume-command {
+    font-size: 18px;
   }
 
-  .card p {
+  .card-resumeCommand .p_resume {
     font-size: 14px;
   }
 
-  .card li {
-    font-size: 12px; 
+  .card-resumeCommand .li_resume {
+    font-size: 12px;
   }
 
-  .progress-bar {
+  .progress-bar-resumeCommand {
     gap: 20px; /* Moins d'espace entre les étapes */
   }
 
-  .step {
+  .step-resumeCommand {
     width: 25px;
     height: 25px;
     font-size: 12px;
   }
 
-  .btn {
+  .btn-resumeCommand {
     width: 100%; /* Le bouton "Suivant" prend toute la largeur de l'écran */
     padding: 12px;
     font-size: 16px;
@@ -246,16 +244,16 @@ export default {
 
 /* Lorsque l'écran est plus petit que 480px (mobiles très petits) */
 @media (max-width: 480px) {
-  .card {
+  .card-resumeCommand {
     padding: 15px; /* Réduire la marge intérieure des cartes */
   }
 
-  .progress-bar {
-    gap: 20px; /* Moins d'espace entre les étapes */
+  .progress-bar-resumeCommand {
+    gap: 20px;
   }
 
-  .btn {
-    font-size: 14px; /* Réduire la taille du texte sur les très petits écrans */
+  .btn-resumeCommand{
+    font-size: 14px;
   }
 }
 </style>

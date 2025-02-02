@@ -1,4 +1,9 @@
 <template>
+  <div class="autres-fruit">
+  <router-link to="/ViewCategorie/Fruits" class="autres-fruit">
+    <p class="autres-fruit"> <i class="fa fa-arrow-left ">  </i> Autres Fruits </p>
+  </router-link>
+</div>
   <div class="product-page">
     <div class="product-container">
       <!-- Image en cercle -->
@@ -131,7 +136,15 @@ export default {
 };
 </script>
   
-  <style scoped>
+<style scoped>
+
+.autres-fruit{
+  color:black;
+  text-decoration: none;
+  padding-left: 3%;
+  background-color: #f8f8f8;
+}
+
 /* Container principal */
 .product-page {
   display: flex;

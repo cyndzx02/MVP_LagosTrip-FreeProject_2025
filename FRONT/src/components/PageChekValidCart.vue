@@ -1,24 +1,23 @@
-
 <template>
-    <div class="container">
-      <form @submit.prevent="submitBankForm" class="form-container">
+    <div class="container-validate">
+      <form @submit.prevent="submitBankForm" class="form-container-validate">
         <header>
           <i class="fas fa-arrow-left"></i>
           <h2>Informations Bancaires</h2>
         </header>
   
         <!-- Barre de progression -->
-        <div class="progress-bar">
+        <div class="progress-bar-validate">
           <button class="step">1</button>
           <button class="step active">2</button>
           <button class="step">3</button>
         </div>
   
         <!-- Séparateur -->
-        <hr class="progress-separator">
+        <hr class="progress-separator-validate">
   
         <!-- Formulaire de saisie -->
-        <section class="bank-info">
+        <section class="bank-info-validate">
           <div class="input-group">
             <label for="accountId">ID du Compte</label>
             <input type="text" id="accountId" v-model="cardDetails.accountId" required>
@@ -30,10 +29,10 @@
           </div>
         </section>
   
-        <button class="btn" type="submit">Envoyer</button>
+        <button class="btn-validate" type="submit">Envoyer</button>
   
         <!-- Message de réponse -->
-        <p v-if="message" class="response-message">{{ message }}</p>
+        <p v-if="message" class="response-message-validate">{{ message }}</p>
       </form>
     </div>
 </template>
@@ -72,18 +71,18 @@
   
 <style scoped>
   /* Réutilisation du style du premier formulaire */
-  .container {
+  .container-validate {
     padding: 20px;
   }
   
-  .form-container {
+  .form-container-validate {
     max-width: 500px;
     margin: auto;
     padding: 20px;
     font-family: Arial, sans-serif;
   }
   
-  .input-group {
+  .input-group-validate {
     margin-bottom: 15px;
   }
   
@@ -99,13 +98,13 @@
     border-radius: 5px;
   }
   
-  .response-message {
+  .response-message-validate {
     margin-top: 10px;
     font-size: 14px;
     color: green;
   }
   
-  .btn {
+  .btn-validate {
     padding: 10px 20px;
     background-color: #008080;
     color: white;
@@ -114,7 +113,7 @@
     cursor: pointer;
   }
   
-  .btn:hover {
+  .btn-validate:hover {
     background-color: #006666;
   }
 </style>
