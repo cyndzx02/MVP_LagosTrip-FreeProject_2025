@@ -12,6 +12,17 @@
         <p><strong>Montant :</strong> {{ invoice.amount }} FCFA</p>
         <p><strong>Client :</strong> {{ invoice.customerName }}</p>
         <p><strong>Email :</strong> {{ invoice.customerEmail }}</p>
+  
+        <!-- Liste des achats -->
+        <h3>Articles Achetés</h3>
+        <ul class="cart-items">
+          <li v-for="item in cartItems" :key="item.id">
+            <p><strong>{{ item.name }}</strong></p>
+            <p>Quantité : {{ item.quantity }}</p>
+            <p>Prix unitaire : {{ item.price }} FCFA</p>
+            <p>Total : {{ (item.price * item.quantity).toFixed(2) }} FCFA</p>
+          </li>
+        </ul>
       </div>
   
       <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
@@ -24,21 +35,30 @@
   export default {
     data() {
       return {
+        cartItems: JSON.parse(localStorage.getItem("cart")) || [],
         invoice: null,
         errorMessage: "",
         loading: false,
         requestData: {
-          amount: "250000",
+          amount: "",
           customerName: "Toyosi Oyelayo",
-          customerEmail: "toyosi@nomail.com",
+          customerEmail: localStorage.getItem("userEmail") || "",
           merchantCode: "MX6072",
           payableCode: "9405967",
           dueDate: "2604188800000",
           discountPercent: "5.5",
           shippingFee: "70000",
-          address: "Address"
+          address: "Address",
         }
       };
+    },
+    computed: {
+      totalPrice() {
+        return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+      }
+    },
+    mounted() {
+      this.requestData.amount = this.totalPrice;
     },
     methods: {
       async fetchInvoice() {
@@ -47,7 +67,7 @@
         this.invoice = null;
   
         try {
-          const response = await axios.post("http://localhost:3500/api/createInvoice", this.requestData); // Remplace par l'URL de ton API
+          const response = await axios.post("http://localhost:3500/api/createInvoice", this.requestData);
           this.invoice = response.data;
         } catch (error) {
           this.errorMessage = "Erreur lors de la récupération de la facture.";
@@ -96,6 +116,19 @@
     background: #f8f8f8;
     padding: 15px;
     border-radius: 5px;
+  }
+  
+  .cart-items {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .cart-items li {
+    background: white;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
   
   .error-message {
