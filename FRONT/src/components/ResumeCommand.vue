@@ -43,13 +43,13 @@
             <p v-if="showLocationInfo">
               Ville : {{ location.city }}<br>
               Quartier : {{ location.district }}<br>
-              Téléphone : {{ location.phone }}
+              <!-- Téléphone : {{ location.phone }} -->
             </p>
           </div>
 
     
   </div>
-          <button class="btn" type="submit">Suivant</button>
+          <button class="btn" type="submit" @click="this.$router.push({ name: 'PageChekValidCart' });">Suivant</button>
         </section>
       </form>
     </div>
@@ -58,34 +58,23 @@
 
 
 
-
-
-
-
-
-
 <script>
 export default {
   data() {
     return {
-      // Informations de la commande
-      // totalPrice: 50,  
-      deliveryPrice: 10,  // Exemple de prix de livraison
-      cartItems: JSON.parse(localStorage.getItem('cart')) || [], // S'il n'y a rien, on initialise un tableau vide
-
+      cartItems: JSON.parse(localStorage.getItem('cart')) || [],
+      deliveryPrice: 10, 
       location: {
-        city: 'Paris',
-        district: 'Le Marais',
-        phone: '+33 1 23 45 67 89'
+        city: '',
+        district: '',
+        phone: ''
       },
       showSummary: false,
       showProducts: false,
       showLocationInfo: false
-
     };
   },
   computed: {
-    // Calcul du total du panier
     totalPrice() {
       return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
     },
@@ -100,9 +89,19 @@ export default {
     toggleLocationInfo() {
       this.showLocationInfo = !this.showLocationInfo;
     }
+  },
+  mounted() {
+    // Récupérer les données de livraison depuis localStorage
+    const storedLocation = JSON.parse(localStorage.getItem('deliveryLocation'));
+    if (storedLocation) {
+      this.location.city = storedLocation.city || '';
+      this.location.district = storedLocation.district || '';
+      this.location.phone = storedLocation.phone || '';
+    }
   }
 };
 </script>
+
 <style scoped>
 .container {
   padding: 20px;
