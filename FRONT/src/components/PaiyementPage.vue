@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    
     <form @submit.prevent="submitForm" class="form-container">
-
       <header>
         <i class="fas fa-arrow-left"></i>
         <h2>Programme ta commande</h2>
@@ -15,22 +13,19 @@
         <button class="step">3</button>
       </div>
 
-      <!-- Traité horizontal stylisé -->
       <hr class="progress-separator">
 
-      <!-- Titre avec icône -->
-     
       <!-- Informations de livraison -->
       <section class="delivery-info">
         <h3><i class="fas fa-map-marker-alt"></i> Adresse de livraison:</h3>
         <div class="form-group">
           <label for="ville">Ville</label>
-          <input type="text" id="ville" v-model="location.city" required placeholder="Entrez votre ville" />
+          <input type="text" id="ville" v-model="location.city" @input="saveToLocalStorage" required placeholder="Entrez votre ville" />
         </div>
 
         <div class="form-group">
           <label for="quartier">Quartier</label>
-          <input type="text" id="quartier" v-model="location.district" required placeholder="Entrez votre quartier" />
+          <input type="text" id="quartier" v-model="location.district" @input="saveToLocalStorage" required placeholder="Entrez votre quartier" />
         </div>
 
         <div class="form-group">
@@ -38,8 +33,7 @@
           <input type="tel" id="phone" v-model="location.phone" required placeholder="Entrez votre numéro de téléphone" />
         </div>
 
-        <button class="btn" type="submit" @click="this.$router.push({ name: 'ResumeCommand'});
-">Suivant</button>
+        <button class="btn" type="submit" @click="navigateToNext">Suivant</button>
       </section>
     </form>
   </div>
@@ -59,12 +53,37 @@ export default {
     };
   },
   methods: {
+    saveToLocalStorage() {
+      localStorage.setItem('deliveryLocation', JSON.stringify({
+        city: this.location.city,
+        district: this.location.district,
+        phone: this.location.phone
+
+      }));
+    },
+    loadFromLocalStorage() {
+      const savedData = localStorage.getItem('deliveryLocation');
+      if (savedData) {
+        const parsedData = JSON.parse(savedData);
+        this.location.city = parsedData.city || '';
+        this.location.district = parsedData.district || '';
+        this.location.phone = parsedData.phone || '';
+
+      }
+    },
     submitForm() {
       console.log("Formulaire soumis", this.location);
+    },
+    navigateToNext() {
+      this.$router.push({ name: 'ResumeCommand' });
     }
-  }
+  },
+  // mounted() {
+  //   this.loadFromLocalStorage();
+  // }
 };
 </script>
+
 
 <style>
 /* Container principal */
