@@ -110,76 +110,89 @@
       </form>
     </div>
   </template>
-  
   <script>
   import axios from "axios";
-
-export default {
-  data() {
-    return {
-      currentStep: 0,
-      steps: [1, 2, 3, 4, 5],
-      message: "",
-      transferDetails: {
-        transferCode: "",
-        mac: "",
-        termination: {
-          amount: "",
-          accountReceivable: {
-            accountNumber: "",
-            accountType: ""
+  
+  export default {
+    data() {
+      return {
+        currentStep: 0,
+        steps: [1, 2, 3, 4, 5],
+        message: "",
+        transferDetails: {
+          transferCode: "",
+          mac: "",
+          termination: {
+            amount: "", // Montant initialisé vide
+            accountReceivable: {
+              accountNumber: "",
+              accountType: ""
+            },
+            entityCode: "044",
+            currencyCode: "566",
+            paymentMethodCode: "AC",
+            countryCode: "NG"
           },
-          entityCode: "044",
-          currencyCode: "566",
-          paymentMethodCode: "AC",
-          countryCode: "NG"
-        },
-        sender: {
-          phone: "",
-          email: "",
-          lastname: "",
-          othernames: ""
-        },
-        initiatingEntityCode: "",
-        initiation: {
-          amount: "100000",
-          currencyCode: "566",
-          paymentMethodCode: "CA",
-          channel: ""
-        },
-        beneficiary: {
-          lastname: "",
-          othernames: ""
+          sender: {
+            phone: "",
+            email: localStorage.getItem("userEmail") || "", // Charger l'email depuis localStorage
+            lastname: "",
+            othernames: ""
+          },
+          initiatingEntityCode: "",
+          initiation: {
+            amount: "100000",
+            currencyCode: "566",
+            paymentMethodCode: "CA",
+            channel: ""
+          },
+          beneficiary: {
+            lastname: "",
+            othernames: ""
+          }
+        }
+      };
+    },
+    computed: {
+      totalPrice() {
+        let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+        console.log(cartItems);
+        return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+      }
+    },
+    watch: {
+      "transferDetails.sender.email": function (newEmail) {
+        localStorage.setItem("userEmail", newEmail); // Sauvegarde de l'email en temps réel
+      }
+    },
+    mounted() {
+      this.transferDetails.termination.amount = this.totalPrice; // Preremplir le montant
+    },
+    methods: {
+      nextStep() {
+        if (this.currentStep < this.steps.length - 1) this.currentStep++;
+      },
+      prevStep() {
+        if (this.currentStep > 0) this.currentStep--;
+      },
+      async submitForm() {
+        console.log("Payload envoyé:", JSON.stringify(this.transferDetails, null, 2));
+        try {
+          const response = await axios.post(
+            "http://localhost:3500/api/transfer",
+            this.transferDetails,
+            {
+              headers: { "Content-Type": "application/json" }
+            }
+          );
+          console.log(response);
+          this.message = "Transfert réussi !";
+        } catch (error) {
+          this.message = "Erreur lors du transfert.";
         }
       }
-    };
-  },
-  methods: {
-    nextStep() {
-      if (this.currentStep < this.steps.length - 1) this.currentStep++;
-    },
-    prevStep() {
-      if (this.currentStep > 0) this.currentStep--;
-    },
-    async submitForm() {
-      console.log("Payload envoyé:", JSON.stringify(this.transferDetails, null, 2));
-      try {
-        const response = await axios.post(
-          "http://localhost:3500/api/transfer",
-          this.transferDetails,
-          {
-            headers: { "Content-Type": "application/json" }
-          }
-        );
-        console.log(response)
-        this.message = "Transfert réussi !";
-      } catch (error) {
-        this.message = "Erreur lors du transfert.";
-      }
     }
-  }
-};
-
+  };
   </script>
   
   <style scoped>
