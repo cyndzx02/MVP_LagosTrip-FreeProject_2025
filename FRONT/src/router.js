@@ -20,6 +20,7 @@ const routes = [
   // { path: '/PanierView', component: PanierView },
   { path: '/login', component: LoginPage },
   { path: '/home', component: HomePage },
+  {path: '/', component: HomePage},
   { path: '/register', component: RegisterPage },
   { path: '/PageChekValidCart', component: PageChekValidCart, name: 'PageChekValidCart'},
   { path: '/TransferPage', component: TransferPage, name: 'TransferPage'},

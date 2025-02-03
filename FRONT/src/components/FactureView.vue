@@ -29,7 +29,7 @@
     </div>
   </template>
   
-  <script>
+<script>
   import axios from "axios";
   
   export default {
@@ -78,9 +78,9 @@
       }
     }
   };
-  </script>
+</script>
   
-  <style scoped>
+<style scoped>
   .success-container {
     max-width: 400px;
     margin: auto;
@@ -94,7 +94,7 @@
   
   .btn {
     padding: 10px 15px;
-    background-color: #008080;
+    background-color: #0a2850;
     color: white;
     border: none;
     border-radius: 5px;
@@ -135,5 +135,5 @@
     color: red;
     margin-top: 10px;
   }
-  </style>
+</style>
   

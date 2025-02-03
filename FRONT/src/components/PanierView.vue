@@ -133,7 +133,7 @@ export default {
   }
   
   .quantity-control button {
-    background-color: #008080;
+    background-color: #0a2850;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -154,6 +154,8 @@ export default {
     padding: 8px 12px;
     border-radius: 5px;
     border: none;
+    /* #0a2850 */
+    border-radius: 25px;
     cursor: pointer;
   }
   
@@ -171,11 +173,13 @@ export default {
   
   /* Bouton de paiement */
   .checkout-button {
-    background-color: #008080;
+    background-color: #0a2850;
     color: white;
     padding: 12px 20px;
     border-radius: 5px;
     border: none;
+    transition: ease-in;
+    border-radius: 25px;
     cursor: pointer;
     width: 100%;
   }
