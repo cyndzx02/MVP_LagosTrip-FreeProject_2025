@@ -10,4 +10,5 @@ Agronova developer documentation
    Contents/Installation
    Contents/Competitivity
    Contents/Business
+   Contents/APIIntegration
 

@@ -5,18 +5,6 @@ Agronova is a platform where customers can access local products of good quality
 With AgroNova, we permit to our cultivator the availability of organic product
 
 
-Context
-=======
-Agriculture is a key sector of the economy, yet many 
-farmers face challenges in selling their products efficiently. 
-Lack of visibility, inventory management complexity, and dependency
-on intermediaries reduce their profit margins.
-
-At the same time, consumers increasingly seek fresh, 
-local agricultural products but struggle to find accessible
-short supply chains. AgroNova aims to address these issues
-by creating a digital platform that directly connects producers with consumers.
-
 Needs
 ======
 AgroNova addresses the following needs:
