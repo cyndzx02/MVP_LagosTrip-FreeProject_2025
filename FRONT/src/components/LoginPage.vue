@@ -21,6 +21,9 @@
           <div class="my-3">
             <button type="submit" class="btn rounded-lg pill login-button">Login</button>
           </div>
+          <router-link to="/register" >
+          Don't have an account? Register
+          </router-link>
         </form>
       </div>
     </div>
@@ -59,6 +62,8 @@ export default {
 /* .login-box{
   /* background-color: black !important; */
 .login-row {
+  height: 100vh;
+  padding-top: 9%;
   background-color: #f0f0f0;
 }
 .login-button{
@@ -67,6 +72,7 @@ export default {
   width: 100% !important;
   align-self: center;
   margin: 4px 2px;
+  color: white !important;
   cursor: pointer !important;
   border-radius: 35px !important;
   background-color: rgb(6, 6, 66);
@@ -79,7 +85,7 @@ export default {
   text-align: left !important;
   padding: 40px !important;
   border-radius: 10px !important;
-  
+  margin-top: 3%;
   /* margin-top: 5%; */
 }
 .all-label {

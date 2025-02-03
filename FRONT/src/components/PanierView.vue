@@ -12,20 +12,20 @@
         <div v-for="(item, index) in cartItems" :key="index" class="cart-item">
           <div class="cart-item-details">
             <h3>{{ item.name }}</h3>
-            <p>Prix : {{ item.price }} €</p>
+            <p>Prix : {{ item.price }} CFA</p>
             <div class="quantity-control">
               <button @click="decreaseQuantity(index)" :disabled="item.quantity <= 1">-</button>
               <span>{{ item.quantity }}</span>
               <button @click="increaseQuantity(index)">+</button>
             </div>
-            <p>Total : {{ (item.price * item.quantity).toFixed(2) }} €</p>
+            <p>Total : {{ (item.price * item.quantity).toFixed(2) }} CFA</p>
             <button @click="removeFromCart(index)" class="remove-item">Supprimer</button>
           </div>
         </div>
 
         <!-- Total du panier -->
         <div class="cart-total">
-          <h3>Total : {{ totalPrice }} €</h3>
+          <h3>Total : {{ totalPrice }} CFA</h3>
           <button @click="checkout" class="checkout-button">Passer à la caisse</button>
         </div>
       </div>

@@ -27,10 +27,10 @@
           <div class="card-resumeCommand" @click="toggleSummary">
             <h3 class="h3_resume">Résumé de la commande</h3>
             <p class="p_resume" v-if="showSummary">
-              Prix total : {{ totalPrice }} €
+              Prix total : {{ totalPrice }} CFA
             </p>
             <p class="p_resume" v-if="showSummary">
-              Prix de livraison : {{ deliveryPrice }} €
+              Prix de livraison : {{ deliveryPrice }} CFA
             </p>
           </div>
 
@@ -45,7 +45,7 @@
                 v-for="(product, index) in cartItems"
                 :key="index"
               >
-                {{ product.name }} - {{ product.price }} €
+                {{ product.name }} - {{ product.price }} CFA
               </li>
             </ul>
           </div>

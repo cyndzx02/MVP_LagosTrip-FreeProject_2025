@@ -36,8 +36,6 @@ export default {
 .agro-logo {
   height: 70px !important;
   width: 60px !important;
-  
-  /* position: fixed; */
 }
 .navbar {
   /* position: fixed !important; */
@@ -91,5 +89,36 @@ export default {
 
 .nav-links a:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-width: 767px) {
+  .links-home {
+  color: #0d2647;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color:  #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.agro-logo {
+  height: 80px !important;
+  width: 80px !important;
+}
+.navbar {
+  width: 100%;
+  max-width: 100cm;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #539337;
+  padding-bottom: 30px;
+  padding: 15px 25px;
+  padding-left: 5%;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 }
 </style>

@@ -21,7 +21,7 @@
             <i class="fas fa-plus"></i>
           </button>
         </div>
-        <p class="item-price-category ">{{ item.price }} €</p>
+        <p class="item-price-category ">{{ item.price }} CFA</p>
         <p class="item-name-category ">{{ item.name }}</p>
       </div>
     </div>

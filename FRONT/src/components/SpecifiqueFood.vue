@@ -1,7 +1,7 @@
 <template>
   <div class="autres-fruit">
   <router-link to="/ViewCategorie/Fruits" class="autres-fruit">
-    <p class="autres-fruit"> <i class="fa fa-arrow-left ">  </i> Autres Fruits </p>
+    <p class="autres-fruit"> <i class="fa fa-arrow-left "> </i> Autres Fruits </p>
   </router-link>
 </div>
   <div class="product-page">
@@ -14,7 +14,7 @@
       <!-- Détails du produit -->
       <div class="product-details">
         <h2>{{ product.name }}</h2>
-        <p class="price">{{ computedPrice }} €</p>
+        <p class="price">{{ computedPrice }} CFA</p>
 
         <!-- Sélecteur de quantité -->
         <div class="quantity-selector">
@@ -63,28 +63,28 @@ export default {
       quantity: 1, // Quantité par défaut
       foodName: this.$route.params.foodName, // Récupérer le foodName de l'URL
       products: [
-        { name: "Carotte", price: 20, image: Carotte },
-        { name: "Tomate", price: 50, image: Tomate },
-        { name: "Ails", price: 50, image: Ails },
-        { name: "Aubergine", price: 50, image: Aubergine },
-        { name: "Concombre", price: 50, image: Concombre },
+        { name: "Carotte", price: 200, image: Carotte },
+        { name: "Tomate", price: 100, image: Tomate },
+        { name: "Ails", price: 100, image: Ails },
+        { name: "Aubergine", price: 300, image: Aubergine },
+        { name: "Concombre", price: 200, image: Concombre },
         { name: "Ginger", price: 50, image: Ginger },
-        { name: "Gombo", price: 50, image: Gombo },
-        { name: "Haricot Rouge", price: 50, image: Haricot_Rouge },
-        { name: "Haricot Vert", price: 50, image: Haricot_Vert },
-        { name: "Laittue", price: 50, image: Laittue },
-        { name: "Bœuf", price: 50, image: Boeuf },
-        { name: "Chicken Breast", price: 30, image: Chicken_Breast },
-        { name: "Chicken Meat", price: 30, image: Chicken_Meat },
-        { name: "Raw Meat", price: 30, image: rawMeat },
-        { name: "Tilapia", price: 50, image: Tilapia },
-        { name: "Tuna", price: 30, image: Tuna },
-        { name: "Sardine", price: 30, image: Sardine },
-        { name: "Banane", price: 50, image: Banane },
+        { name: "Gombo", price: 100, image: Gombo },
+        { name: "Haricot Rouge", price: 530, image: Haricot_Rouge },
+        { name: "Haricot Vert", price: 500, image: Haricot_Vert },
+        { name: "Laittue", price: 530, image: Laittue },
+        { name: "Bœuf", price: 2500, image: Boeuf },
+        { name: "Chicken Breast", price: 1800, image: Chicken_Breast },
+        { name: "Chicken Meat", price: 1800, image: Chicken_Meat },
+        { name: "Raw Meat", price: 3000, image: rawMeat },
+        { name: "Tilapia", price: 5000, image: Tilapia },
+        { name: "Tuna", price: 1600, image: Tuna },
+        { name: "Sardine", price: 500, image: Sardine },
+        { name: "Banane", price: 530, image: Banane },
         { name: "Kiwi", price: 320, image: Kiwi },
         { name: "Fraise", price: 300, image: Fraise },
-        { name: "Orange", price: 30, image: Orange },
-        { name: "Fruit de la passion", price: 30, image: Passion_Fruits },
+        { name: "Orange", price: 300, image: Orange },
+        { name: "Fruit de la passion", price: 300, image: Passion_Fruits },
       ],
     };
   },
@@ -198,7 +198,7 @@ export default {
 }
 
 .quantity-selector button {
-  background-color: #008080;
+  background-color: #0a2850;
   color: white;
   border: none;
   padding: 10px;
@@ -216,7 +216,7 @@ export default {
 }
 
 .add-to-cart {
-  background-color: #008080;
+  background-color: #0a2850;
   color: white;
   padding: 15px;
   border-radius: 5px;

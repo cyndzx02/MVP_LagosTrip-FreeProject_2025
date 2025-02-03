@@ -69,7 +69,7 @@ export default {
 <style  scoped>
 /* { */
 .register-row {
-   /* height: 50%;  */
+   height: 100vh; 
   background-color: #f0f0f0;
 }
 .register {
@@ -87,6 +87,7 @@ export default {
   margin-left: 0 !important;
   font-size: 20px;
   width: 100% !important;
+  color: white;
   align-self: center;
   background-color: rgb(6, 6, 66);
 }
@@ -98,6 +99,7 @@ export default {
   background: white;
   text-align: left;
   padding: 40px;
+  padding-top: 3%;
   border-radius: 10px;
 
 }

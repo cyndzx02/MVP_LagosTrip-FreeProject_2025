@@ -90,6 +90,7 @@ export default {
 .our-category-home {
   /* padding-bottom: 5cm; */
   margin-top: 5cm;
+  margin-right: 4cm ;
   /* background-color: black; */
   /* padding-top: 4%; */
 }
@@ -155,24 +156,14 @@ export default {
 
 /* Grille des catégories avec plus d'espace */
 .categories-grid-home {
-  /* display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  justify-content: center;
-   */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-left: 5%;
   justify-items: center;
-  /* margin-left: 5cm; */
-  margin-left: 4cm;
   width: 70%;
-  max-width: 1000px;
+  align-items: center;
+  /* max-width: 1000px; */
   margin-top: 0.5cm;
-  position: flex;
-  z-index: 15%;
- 
-  /* margin-top: 5px; */
 }
 
 .category-item-home {
@@ -189,8 +180,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-top: 100%; */
-  /* margin: auto; */
+  
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
@@ -208,11 +198,10 @@ export default {
 .category-name-home {
   font-size: 15;
   font-weight: bold;
-  /* margin-top: 5px; */
   cursor: pointer;
 }
 
-/* Responsivité */
+
 @media screen and (max-width: 991px) {
   .categories-grid-home {
     grid-template-columns: repeat(
@@ -224,19 +213,22 @@ export default {
 
 @media screen and (max-width: 767px) {
   .categories-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
   }
   .our-category {
-  padding-bottom: 3%;
+  margin-right: 5%;
+  /* padding-bottom: 3%; */
   margin-bottom: 5%;
   }
   .category-circle {
+    margin-right: 5%;
     width: 100px;
     height: 100px;
   }
 
   .categoryimg {
+    margin-right: 5%;
     width: 50px;
     height: 50px;
   }
@@ -247,13 +239,13 @@ export default {
 
   .search-bar {
     width: 100%;
-    max-width: none;
+    max-width: 100%;
     margin-top: -50%;
+    margin-right: 10cm;
   }
 
   .search-bar input {
-    /* padding-bottom: 5%; */
-    width: 70%; /* Réduit la largeur du champ de recherche sur les petits écrans */
+    width: 70%; 
   }
 
   .search-button {
