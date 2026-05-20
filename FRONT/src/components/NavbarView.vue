@@ -1,124 +1,46 @@
 <template>
-  <!-- <div class="bg-surface-variant pa-4 position-relative rounded-lg ma-2"></div> -->
-    <nav class="navbar  ">
-      <div class="nav-container ">
-        <!-- <h1 class="logo" >MonShop</h1> -->
+  <nav class="sticky top-0 z-50 w-full bg-[#539337] shadow-md">
+    <div class="mx-auto flex h-16 max-w-screen-content items-center justify-between px-4 sm:px-6 lg:px-8">
+      <router-link to="/home" class="flex items-center">
         <img
           src="../assets/agronova-logo.png"
-          alt="Logo"
-          class="img-fluid agro-logo"
+          alt="AgroNova"
+          class="h-12 w-auto"
         />
+      </router-link>
 
-        <ul class="nav-links">
-          <li><router-link to="/home">Accueil</router-link></li>
-          <li><router-link to="/PanierView">Panier</router-link></li>
-          <li><router-link to="/Paiement">Paiement</router-link></li>
-        </ul>
-      </div>
-    </nav>
-  
+      <ul class="flex items-center gap-4 sm:gap-6 lg:gap-8">
+        <li>
+          <router-link
+            to="/home"
+            class="text-sm font-semibold text-white transition hover:underline sm:text-base"
+          >
+            Accueil
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            to="/PanierView"
+            class="text-sm font-semibold text-white transition hover:underline sm:text-base"
+          >
+            Panier
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            to="/Paiement"
+            class="text-sm font-semibold text-white transition hover:underline sm:text-base"
+          >
+            Paiement
+          </router-link>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </template>
 
 <script>
-import 'vuetify/styles'
 export default {
-  // name: "Navbar",
+  name: 'NavbarView',
 }
 </script>
-
-<style scoped>
-/* Barre de navigation */
-
-.links-home {
-  color: #0d2647;
-}
-
-.agro-logo {
-  height: 70px !important;
-  width: 60px !important;
-}
-.navbar {
-  /* position: fixed !important; */
-  width: auto;
-  width: 100%;
-  /* box-shadow: 10px !important; */
-  z-index: 1000;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #539337;
-  padding-bottom: 30px;
-  padding: 15px 25px;
-  padding-top: 1%;
-  height: 65px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-container {
-  position: static !important;
-  width: 100%;
-  max-width: 900px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-.nav-links li {
-  display: inline;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color:  #ffffff;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.nav-links a:hover {
-  text-decoration: underline;
-}
-
-@media screen and (max-width: 767px) {
-  .links-home {
-  color: #0d2647;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color:  #ffffff;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-.agro-logo {
-  height: 80px !important;
-  width: 80px !important;
-}
-.navbar {
-  width: 100%;
-  max-width: 100cm;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #539337;
-  padding-bottom: 30px;
-  padding: 15px 25px;
-  padding-left: 5%;
-  height: 65px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-}
-</style>

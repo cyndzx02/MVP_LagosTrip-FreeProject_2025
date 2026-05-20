@@ -1,12 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router' // Import du router
+import router from './router'
+import './assets/styles/tailwind.css'
 import './registerServiceWorker'
 
-if (module.hot){
-    module.hot.accept();
-}
-
 const app = createApp(App)
-app.use(router) // Utilisation de Vue Router
+app.use(router)
 app.mount('#app')

@@ -1,280 +1,120 @@
 <template>
+  <div class="min-h-[calc(100vh-4rem)] bg-slate-50 px-4 py-6 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-xl">
+      <form
+        class="card-soft space-y-6 p-6 sm:p-8"
+        @submit.prevent="submitForm"
+      >
+        <header class="flex items-center gap-3">
+          <router-link
+            to="/home"
+            class="text-slate-700 transition hover:text-brand-500"
+            aria-label="Retour"
+          >
+            <i class="fas fa-arrow-left"></i>
+          </router-link>
+          <h1 class="text-xl font-bold text-slate-900 sm:text-2xl">
+            Programme ta commande
+          </h1>
+        </header>
 
-  <div class="container-paiement">
-    <form @submit.prevent="submitForm" class="form-container-paiement">
-      <header class="header-paiement">
-        <router-link class="arrow-color-paiement" to="/home">
-          <i class="fas fa-arrow-left arrow-color-paiement"></i>
-        </router-link>
-        <h2>Programme ta commande</h2>
-      </header>
-
-      <!-- Barre de progression -->
-      <div class="progress-bar-paiement">
-        <button class="step-paiement active-paiement">1</button>
-        <button class="step-paiement">2</button>
-        <button class="step-paiement">3</button>
-      </div>
-
-      <hr class="progress-separator" />
-
-      <!-- Informations de livraison -->
-      <section class="delivery-info-paiement">
-        <h3><i class="fas fa-map-marker-alt"></i> Adresse de livraison:</h3>
-        <div class="form-group-paiement">
-          <label for="ville">Ville</label>
-          <input
-            type="text"
-            id="ville"
-            v-model="location.city"
-            @input="saveToLocalStorage"
-            required
-            placeholder="Entrez votre ville"
-          />
+        <!-- Step indicator -->
+        <div class="flex items-center justify-center gap-4 sm:gap-8">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-[#539337] text-base font-semibold text-white">1</span>
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-slate-200 text-base font-semibold text-slate-700">2</span>
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-slate-200 text-base font-semibold text-slate-700">3</span>
         </div>
 
-        <div class="form-group-paiement">
-          <label for="quartier">Quartier</label>
-          <input
-            type="text"
-            id="quartier"
-            v-model="location.district"
-            @input="saveToLocalStorage"
-            required
-            placeholder="Entrez votre quartier"
-          />
-        </div>
+        <hr class="h-px border-0 bg-gradient-to-r from-brand-500 via-brand-400 to-teal-700" />
 
-        <div class="form-group-paiement">
-          <label for="phone">Numéro de téléphone</label>
-          <input
-            type="tel"
-            id="phone"
-            v-model="location.phone"
-            required
-            placeholder="Entrez votre numéro de téléphone"
-          />
-        </div>
+        <section class="space-y-4">
+          <h2 class="flex items-center gap-2 text-base font-semibold text-slate-900 sm:text-lg">
+            <i class="fas fa-map-marker-alt text-orange-500"></i>
+            Adresse de livraison
+          </h2>
 
-        <button class="btn-paiement" type="submit" @click="navigateToNext">
-          Suivant
-        </button>
-      </section>
-    </form>
+          <div>
+            <label for="ville" class="mb-1 block text-sm font-semibold text-slate-700">Ville</label>
+            <input
+              id="ville"
+              v-model="location.city"
+              type="text"
+              required
+              placeholder="Entrez votre ville"
+              class="input-field"
+              @input="saveToLocalStorage"
+            />
+          </div>
+
+          <div>
+            <label for="quartier" class="mb-1 block text-sm font-semibold text-slate-700">Quartier</label>
+            <input
+              id="quartier"
+              v-model="location.district"
+              type="text"
+              required
+              placeholder="Entrez votre quartier"
+              class="input-field"
+              @input="saveToLocalStorage"
+            />
+          </div>
+
+          <div>
+            <label for="phone" class="mb-1 block text-sm font-semibold text-slate-700">Numéro de téléphone</label>
+            <input
+              id="phone"
+              v-model="location.phone"
+              type="tel"
+              required
+              placeholder="Entrez votre numéro"
+              class="input-field"
+              @input="saveToLocalStorage"
+            />
+          </div>
+
+          <button type="submit" class="btn-primary w-full text-base">Suivant</button>
+        </section>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
-
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css"
 
 export default {
+  name: 'PaiyementPage',
   data() {
     return {
       location: {
-        city: "",
-        district: "",
-        phone: "",
+        city: '',
+        district: '',
+        phone: '',
       },
-    };
+    }
   },
   methods: {
     saveToLocalStorage() {
       localStorage.setItem(
-        "deliveryLocation",
-        JSON.stringify({
-          city: this.location.city,
-          district: this.location.district,
-          phone: this.location.phone,
-        })
-      );
+        'deliveryLocation',
+        JSON.stringify({ ...this.location })
+      )
     },
     loadFromLocalStorage() {
-      const savedData = localStorage.getItem("deliveryLocation");
-      if (savedData) {
-        const parsedData = JSON.parse(savedData);
-        this.location.city = parsedData.city || "";
-        this.location.district = parsedData.district || "";
-        this.location.phone = parsedData.phone || "";
+      const saved = JSON.parse(localStorage.getItem('deliveryLocation'))
+      if (saved) {
+        this.location.city = saved.city || ''
+        this.location.district = saved.district || ''
+        this.location.phone = saved.phone || ''
       }
     },
     submitForm() {
-      console.log("Formulaire soumis", this.location);
-    },
-    navigateToNext() {
-      this.$router.push({ name: "ResumeCommand" });
+      this.saveToLocalStorage()
+      this.$router.push({ name: 'ResumeCommand' })
     },
   },
-  // mounted() {
-  //   this.loadFromLocalStorage();
-  // }
-};
+  mounted() {
+    this.loadFromLocalStorage()
+  },
+}
 </script>
-
-<style>
-
-/* Container principal */
-.container-paiement {
-  /* margin-top: 2%; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 98vh;
-  background-color: #f8f8f8;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.arrow-color-paiement {
-  position: inherit;
-  color: black ;
-  margin-right: 5%;
-}
-
-/* Formulaire */
-.form-container-paiement {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 40px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 500px;
-}
-
-.header-paiement {
-  display: flex;
-  align-items: center;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-.progress-bar-paiement {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-}
-
-.step-paiement {
-  width: 40px; /* Taille des étapes plus grande */
-  height: 40px;
-  background-color: #e0e0e0;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px; /* Taille de la police plus grande */
-  color: black;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.step-paiement.active-paiement {
-  background-color: #539337;
-  color: white;
-}
-
-.step-paiement:hover {
-  background-color: #125858;
-  color: white;
-}
-
-.progress-separator-paiement {
-  width: 90%;
-  border: none;
-  height: 2px;
-  background: linear-gradient(to right, #0a2850, #0a2850, #008080);
-}
-
-.delivery-info-paiement h3 {
-  font-size: 18px;
-  display: flex;
-  align-items: center; /* Alignement de l'icône et du texte */
-  gap: 10px; /* Espacement entre l'icône et le texte */
-}
-
-.delivery-info-paiement .form-group-paiement {
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* Espacement entre les champs du formulaire */
-}
-
-label {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-input {
-  padding: 12px;
-  margin-top: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-input[type="tel"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.btn-paiement {
-  padding: 14px;
-  width: 100%;
-  background-color: #0a2850;
-  color: white;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 18px; /* Taille du texte du bouton plus grande */
-  cursor: pointer;
-  border: none;
-  transition: background-color 0.3s;
-}
-
-.btn-paiement:hover {
-  background-color: #0a2850;
-}
-
-h3 i {
-  color: #f15411; /* Choisissez la couleur que vous préférez */
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .form-container-paiement {
-    width: 100%; /* Prend toute la largeur sur les petits écrans */
-    padding: 20px;
-  }
-
-  .header-paiement {
-    font-size: 18px;
-  }
-
-  .step-paiement {
-    width: 35px;
-    height: 35px;
-    font-size: 18px;
-  }
-
-  .progress-bar-paiement {
-    gap: 20px; /* Moins d'espace entre les étapes */
-  }
-
-  .delivery-info-paiement h3 {
-    font-size: 16px; /* Réduit la taille du titre */
-  }
-
-  input {
-    padding: 10px;
-    font-size: 14px; /* Plus petit texte d'entrée */
-  }
-
-  .btn-paiement {
-    font-size: 16px; /* Réduit la taille du bouton sur mobile */
-    padding: 12px;
-  }
-}
-</style>

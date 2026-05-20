@@ -1,67 +1,107 @@
 <template>
-  <div class="autres-fruit">
-  <router-link to="/ViewCategorie/Fruits" class="autres-fruit">
-    <p class="autres-fruit"> <i class="fa fa-arrow-left "> </i> Autres Fruits </p>
-  </router-link>
-</div>
-  <div class="product-page">
-    <div class="product-container">
-      <!-- Image en cercle -->
-      <div class="product-image">
-        <img :src="product.image" alt="Produit" />
-      </div>
+  <div class="min-h-[calc(100vh-4rem)] bg-slate-50 px-4 py-6 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-screen-content">
+      <router-link
+        :to="{ name: 'ViewCategorie', params: { category: 'Fruits' } }"
+        class="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 transition hover:text-brand-500"
+      >
+        <i class="fas fa-arrow-left"></i>
+        <span>Autres produits</span>
+      </router-link>
 
-      <!-- Détails du produit -->
-      <div class="product-details">
-        <h2>{{ product.name }}</h2>
-        <p class="price">{{ computedPrice }} CFA</p>
+      <div class="mt-8 flex items-center justify-center">
+        <div
+          v-if="product"
+          class="card-soft w-full max-w-md p-6 sm:p-8"
+        >
+          <div class="flex flex-col items-center text-center">
+            <div class="h-36 w-36 overflow-hidden rounded-full bg-slate-100 ring-1 ring-slate-200 sm:h-40 sm:w-40">
+              <img :src="product.image" :alt="product.name" class="h-full w-full object-cover" />
+            </div>
 
-        <!-- Sélecteur de quantité -->
-        <div class="quantity-selector">
-          <button @click="decreaseQuantity" :disabled="quantity <= 1">-</button>
-          <input type="number" v-model="quantity" min="1" @input="updatePrice" />
-          <button @click="increaseQuantity">+</button>
+            <h1 class="mt-4 text-xl font-bold text-slate-900 sm:text-2xl">
+              {{ product.name }}
+            </h1>
+            <p class="mt-1 text-lg font-semibold text-brand-500">
+              {{ computedPrice }} CFA
+            </p>
+
+            <div class="mt-6 flex items-center gap-3">
+              <button
+                type="button"
+                class="flex h-10 w-10 items-center justify-center rounded-md bg-brand-500 text-lg font-bold text-white transition hover:bg-brand-600 disabled:opacity-50 disabled:hover:bg-brand-500"
+                :disabled="quantity <= 1"
+                @click="decreaseQuantity"
+                aria-label="Diminuer"
+              >−</button>
+              <input
+                v-model.number="quantity"
+                type="number"
+                min="1"
+                class="h-10 w-16 rounded-md border border-slate-300 text-center text-base outline-none focus:border-brand-500"
+                @input="updatePrice"
+              />
+              <button
+                type="button"
+                class="flex h-10 w-10 items-center justify-center rounded-md bg-brand-500 text-lg font-bold text-white transition hover:bg-brand-600"
+                @click="increaseQuantity"
+                aria-label="Augmenter"
+              >+</button>
+            </div>
+
+            <button
+              type="button"
+              class="btn-primary mt-6 w-full text-base"
+              @click="addToCart"
+            >
+              Ajouter au panier
+            </button>
+          </div>
         </div>
 
-        <!-- Bouton Ajouter au panier -->
-        <button class="add-to-cart" @click="addToCart">Ajouter au panier</button>
+        <div v-else class="card-soft w-full max-w-md p-6 text-center">
+          <p class="text-slate-700">Produit introuvable.</p>
+          <router-link to="/home" class="mt-4 inline-block font-semibold text-brand-500 hover:underline">
+            Retour à l'accueil
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Tomate from "../assets/Veggies/tomato.png";
-import Ails from "../assets/Veggies/ails.png";
-import Aubergine from "../assets/Veggies/aubergine.png";
-import Carotte from "../assets/Veggies/carotte.png";
-import Concombre from "../assets/Veggies/concombre.png";
-import Ginger from "../assets/Veggies/ginger.png";
-import Gombo from "../assets/Veggies/gombo.png";
-import Haricot_Rouge from "../assets/Veggies/haricotrouge.png";
-import Haricot_Vert from "../assets/Veggies/haricotvert.png";
-import Laittue from "../assets/Veggies/laittue.png";
+import Tomate from "../assets/Veggies/tomato.png"
+import Ails from "../assets/Veggies/ails.png"
+import Aubergine from "../assets/Veggies/aubergine.png"
+import Carotte from "../assets/Veggies/carotte.png"
+import Concombre from "../assets/Veggies/concombre.png"
+import Ginger from "../assets/Veggies/ginger.png"
+import Gombo from "../assets/Veggies/gombo.png"
+import Haricot_Rouge from "../assets/Veggies/haricotrouge.png"
+import Haricot_Vert from "../assets/Veggies/haricotvert.png"
+import Laittue from "../assets/Veggies/laittue.png"
 
-import Boeuf from "../assets/Meats/beef.png";
-import Chicken_Breast from "../assets/Meats/chicken-breast.png";
-import Chicken_Meat from "../assets/Meats/chicken-meat.png";
-import rawMeat from "../assets/Meats/rawMeat.png";
+import Boeuf from "../assets/Meats/beef.png"
+import Chicken_Breast from "../assets/Meats/chicken-breast.png"
+import Chicken_Meat from "../assets/Meats/chicken-meat.png"
+import rawMeat from "../assets/Meats/rawMeat.png"
 
-import Banane from "../assets/Fruits/banane.png";
-import Fraise from "../assets/Fruits/fraise.png";
-import Orange from "../assets/Fruits/orange.png";
-import Kiwi from "../assets/Fruits/kiwi.png";
-import Passion_Fruits from "../assets/Fruits/passionFruit.png";
+import Banane from "../assets/Fruits/banane.png"
+import Fraise from "../assets/Fruits/fraise.png"
+import Orange from "../assets/Fruits/orange.png"
+import Kiwi from "../assets/Fruits/kiwi.png"
+import Passion_Fruits from "../assets/Fruits/passionFruit.png"
 
-import Tilapia from "../assets/Fishes/tilapia.png";
-import Sardine from "../assets/Fishes/sardine.png";
-import Tuna from "../assets/Fishes/tuna.png";
+import Tilapia from "../assets/Fishes/tilapia.png"
+import Sardine from "../assets/Fishes/sardine.png"
+import Tuna from "../assets/Fishes/tuna.png"
 
 export default {
+  name: 'SpecifiqueFood',
   data() {
     return {
-      quantity: 1, // Quantité par défaut
-      foodName: this.$route.params.foodName, // Récupérer le foodName de l'URL
+      quantity: 1,
       products: [
         { name: "Carotte", price: 200, image: Carotte },
         { name: "Tomate", price: 100, image: Tomate },
@@ -86,254 +126,53 @@ export default {
         { name: "Orange", price: 300, image: Orange },
         { name: "Fruit de la passion", price: 300, image: Passion_Fruits },
       ],
-    };
+    }
   },
   computed: {
+    foodName() {
+      return this.$route.params.foodName
+    },
     product() {
-      return this.products.find(product => product.name === this.foodName);
+      return this.products.find(p => p.name === this.foodName)
     },
     computedPrice() {
-      return (this.product.price * this.quantity).toFixed(2); // Calcul dynamique du prix
+      if (!this.product) return '0.00'
+      return (this.product.price * this.quantity).toFixed(2)
     },
   },
   methods: {
-  increaseQuantity() {
-    this.quantity++;
+    increaseQuantity() {
+      this.quantity++
+    },
+    decreaseQuantity() {
+      if (this.quantity > 1) this.quantity--
+    },
+    updatePrice() {
+      this.quantity = Math.max(1, Number(this.quantity) || 1)
+    },
+    addToCart() {
+      if (!this.product) return
+      const cart = JSON.parse(localStorage.getItem('cart')) || []
+      const existingProductIndex = cart.findIndex(item => item.name === this.product.name)
+
+      if (existingProductIndex !== -1) {
+        cart[existingProductIndex].quantity += this.quantity
+        cart[existingProductIndex].totalPrice = (
+          cart[existingProductIndex].price * cart[existingProductIndex].quantity
+        ).toFixed(2)
+      } else {
+        cart.push({
+          id: `${this.product.name}-${Date.now()}`,
+          name: this.product.name,
+          price: this.product.price,
+          quantity: this.quantity,
+          totalPrice: (this.product.price * this.quantity).toFixed(2),
+        })
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart))
+      this.$router.push({ name: 'Panier' })
+    },
   },
-  decreaseQuantity() {
-    if (this.quantity > 1) this.quantity--;
-  },
-  updatePrice() {
-    this.quantity = Math.max(1, this.quantity);
-  },
-  addToCart() {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    const existingProductIndex = cart.findIndex(item => item.name === this.product.name);
-
-    if (existingProductIndex !== -1) {
-      cart[existingProductIndex].quantity += this.quantity;
-      cart[existingProductIndex].totalPrice = (cart[existingProductIndex].price * cart[existingProductIndex].quantity).toFixed(2);
-    } else {
-      const productData = {
-        name: this.product.name,
-        price: this.product.price,
-        quantity: this.quantity,
-        totalPrice: (this.product.price * this.quantity).toFixed(2),
-      };
-      cart.push(productData);
-    }
-
-    // Sauvegarder le panier dans le localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-    this.$router.push({ name: 'Panier'});
-
-    // let to = JSON.parse(localStorage.getItem('cart'));
-    // console.log(to);
-  },
-},
-
-};
+}
 </script>
-  
-<style scoped>
-
-.autres-fruit{
-  color:black;
-  text-decoration: none;
-  padding-left: 3%;
-  background-color: #f8f8f8;
-}
-
-/* Container principal */
-.product-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f8f8f8;
-}
-
-.product-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
-  padding: 60px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 100%;
-}
-
-/* Image du produit */
-.product-image img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-/* Détails du produit */
-.product-details {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.product-details h2 {
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.price {
-  font-size: 18px;
-  color: #008080;
-  margin-top: 10px;
-}
-
-.quantity-selector {
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.quantity-selector button {
-  background-color: #0a2850;
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 18px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.quantity-selector input {
-  width: 60px;
-  padding: 5px;
-  text-align: center;
-  font-size: 18px;
-  margin: 0 10px;
-}
-
-.add-to-cart {
-  background-color: #0a2850;
-  color: white;
-  padding: 15px;
-  border-radius: 5px;
-  font-size: 18px;
-  cursor: pointer;
-  margin-top: 20px;
-  width: 100%;
-}
-
-.add-to-cart:hover {
-  background-color: #006666;
-}
-
-/* Media Queries pour rendre la page responsive */
-
-/* Pour les petits écrans comme les smartphones */
-@media (max-width: 600px) {
-  .product-container {
-    padding: 30px;
-  }
-
-  .product-image img {
-    width: 120px;
-    height: 120px;
-  }
-
-.product-details h2 {
-    font-size: 18px;
-  }
-
-  .price {
-    font-size: 16px;
-  }
-
-  .quantity-selector button {
-    padding: 8px;
-    font-size: 16px;
-  }
-
-  .quantity-selector input {
-    width: 50px;
-    font-size: 16px;
-  }
-
-  .add-to-cart {
-    font-size: 16px;
-    padding: 12px;
-  }
-}
-
-/* Pour les tablettes */
-@media (max-width: 900px) {
-  .product-container {
-    padding: 50px;
-  }
-
-  .product-image img {
-    width: 130px;
-    height: 130px;
-  }
-
-  .product-details h2 {
-    font-size: 20px;
-  }
-
-  .price {
-    font-size: 17px;
-  }
-
-  .quantity-selector button {
-    padding: 9px;
-    font-size: 17px;
-  }
-
-  .quantity-selector input {
-    width: 55px;
-    font-size: 17px;
-  }
-
-  .add-to-cart {
-    font-size: 17px;
-    padding: 14px;
-  }
-}
-
-/* Pour les grands écrans */
-@media (min-width: 1200px) {
-  .product-container {
-    padding: 60px;
-  }
-
-  .product-image img {
-    width: 150px;
-    height: 150px;
-  }
-
-  .product-details h2 {
-    font-size: 22px;
-  }
-
-  .price {
-    font-size: 18px;
-  }
-
-  .quantity-selector button {
-    padding: 10px;
-    font-size: 18px;
-  }
-
-  .quantity-selector input {
-    width: 60px;
-    font-size: 18px;
-  }
-
-  .add-to-cart {
-    font-size: 18px;
-    padding: 15px;
-  }
-}
-</style>

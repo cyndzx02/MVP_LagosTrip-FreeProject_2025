@@ -1,32 +1,73 @@
 <template>
-  <div class="cart-page">
-    <div class="cart-container">
-      <h2>Votre Panier</h2>
+  <div class="min-h-[calc(100vh-4rem)] bg-slate-50 px-4 py-6 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl">
+      <div class="card-soft p-6 sm:p-8">
+        <h1 class="text-center text-2xl font-bold text-slate-900 sm:text-3xl">
+          Votre panier
+        </h1>
 
-      <div v-if="cartItems.length === 0" class="empty-cart">
-        <p>Votre panier est vide.</p>
-      </div>
-
-      <div v-else>
-        <!-- Liste des articles du panier -->
-        <div v-for="(item, index) in cartItems" :key="index" class="cart-item">
-          <div class="cart-item-details">
-            <h3>{{ item.name }}</h3>
-            <p>Prix : {{ item.price }} CFA</p>
-            <div class="quantity-control">
-              <button @click="decreaseQuantity(index)" :disabled="item.quantity <= 1">-</button>
-              <span>{{ item.quantity }}</span>
-              <button @click="increaseQuantity(index)">+</button>
-            </div>
-            <p>Total : {{ (item.price * item.quantity).toFixed(2) }} CFA</p>
-            <button @click="removeFromCart(index)" class="remove-item">Supprimer</button>
-          </div>
+        <div v-if="cartItems.length === 0" class="mt-8 text-center text-slate-500">
+          <p>Votre panier est vide.</p>
+          <router-link to="/home" class="mt-4 inline-block font-semibold text-brand-500 hover:underline">
+            Continuer mes achats
+          </router-link>
         </div>
 
-        <!-- Total du panier -->
-        <div class="cart-total">
-          <h3>Total : {{ totalPrice }} CFA</h3>
-          <button @click="checkout" class="checkout-button">Passer à la caisse</button>
+        <ul v-else class="mt-6 divide-y divide-slate-200">
+          <li
+            v-for="(item, index) in cartItems"
+            :key="item.id || `${item.name}-${index}`"
+            class="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div class="flex-1">
+              <h2 class="text-base font-semibold text-slate-900 sm:text-lg">
+                {{ item.name }}
+              </h2>
+              <p class="text-sm text-slate-500">{{ item.price }} CFA</p>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <button
+                type="button"
+                class="flex h-9 w-9 items-center justify-center rounded-md bg-brand-500 text-white transition hover:bg-brand-600 disabled:bg-slate-300 disabled:hover:bg-slate-300"
+                :disabled="item.quantity <= 1"
+                @click="decreaseQuantity(index)"
+                aria-label="Diminuer"
+              >−</button>
+              <span class="min-w-[1.5rem] text-center text-base font-semibold">
+                {{ item.quantity }}
+              </span>
+              <button
+                type="button"
+                class="flex h-9 w-9 items-center justify-center rounded-md bg-brand-500 text-white transition hover:bg-brand-600"
+                @click="increaseQuantity(index)"
+                aria-label="Augmenter"
+              >+</button>
+            </div>
+
+            <div class="flex items-center justify-between gap-3 sm:flex-col sm:items-end">
+              <p class="text-sm font-bold text-slate-900 sm:text-base">
+                {{ (item.price * item.quantity).toFixed(2) }} CFA
+              </p>
+              <button
+                type="button"
+                class="text-xs font-semibold text-red-600 hover:text-red-700 sm:text-sm"
+                @click="removeFromCart(index)"
+              >
+                Supprimer
+              </button>
+            </div>
+          </li>
+        </ul>
+
+        <div v-if="cartItems.length > 0" class="mt-6 border-t border-slate-200 pt-6">
+          <div class="flex items-center justify-between">
+            <span class="text-lg font-bold text-slate-900">Total</span>
+            <span class="text-lg font-bold text-brand-500">{{ totalPrice }} CFA</span>
+          </div>
+          <button type="button" class="btn-primary mt-4 w-full text-base" @click="checkout">
+            Passer à la caisse
+          </button>
         </div>
       </div>
     </div>
@@ -35,164 +76,40 @@
 
 <script>
 export default {
+  name: 'PanierView',
   data() {
     return {
-      // Charger les items du panier depuis le localStorage
-      cartItems: JSON.parse(localStorage.getItem('cart')) || [], // S'il n'y a rien, on initialise un tableau vide
-    };
+      cartItems: JSON.parse(localStorage.getItem('cart')) || [],
+    }
   },
   computed: {
-    // Calcul du total du panier
     totalPrice() {
-      return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+      return this.cartItems
+        .reduce((acc, item) => acc + item.price * item.quantity, 0)
+        .toFixed(2)
     },
   },
   methods: {
-    // Méthode pour augmenter la quantité d'un produit
     increaseQuantity(index) {
-      this.cartItems[index].quantity++;
-      this.updateLocalStorage(); // Mise à jour du localStorage après modification
+      this.cartItems[index].quantity++
+      this.updateLocalStorage()
     },
-    // Méthode pour diminuer la quantité d'un produit
     decreaseQuantity(index) {
       if (this.cartItems[index].quantity > 1) {
-        this.cartItems[index].quantity--;
-        this.updateLocalStorage(); // Mise à jour du localStorage après modification
+        this.cartItems[index].quantity--
+        this.updateLocalStorage()
       }
     },
-    // Méthode pour supprimer un produit du panier
     removeFromCart(index) {
-      this.cartItems.splice(index, 1);
-      this.updateLocalStorage(); // Mise à jour du localStorage après suppression
+      this.cartItems.splice(index, 1)
+      this.updateLocalStorage()
     },
     updateLocalStorage() {
-      localStorage.setItem('cart', JSON.stringify(this.cartItems));
+      localStorage.setItem('cart', JSON.stringify(this.cartItems))
     },
     checkout() {
-      alert("Passer à la caisse");
+      this.$router.push({ name: 'Paiement' })
     },
   },
-  watch: {
-    cartItems(newCartItems) {
-      localStorage.setItem('cart', JSON.stringify(newCartItems));
-    },
-  },
-};
+}
 </script>
-
-<style scoped>
-  /* Style global de la page */
-  .cart-page {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-    background-color: #f8f8f8;
-  }
-  
-  /* Conteneur principal */
-  .cart-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
-  }
-  
-  h2 {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Style des éléments du panier */
-  .cart-item {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 15px 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .cart-item-details h3 {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .cart-item p {
-    font-size: 16px;
-    margin: 5px 0;
-  }
-  
-  /* Boutons de gestion des quantités */
-  .quantity-control {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .quantity-control button {
-    background-color: #0a2850;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .quantity-control button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
-  
-  /* Bouton supprimer */
-  .remove-item {
-    background-color: #ff4040;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    border: none;
-    /* #0a2850 */
-    border-radius: 25px;
-    cursor: pointer;
-  }
-  
-  .remove-item:hover {
-    background-color: #cc3333;
-  }
-  
-  /* Total du panier */
-  .cart-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  /* Bouton de paiement */
-  .checkout-button {
-    background-color: #0a2850;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 5px;
-    border: none;
-    transition: ease-in;
-    border-radius: 25px;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .checkout-button:hover {
-    background-color: #006666;
-  }
-  
-  /* Panier vide */
-  .empty-cart {
-    text-align: center;
-    font-size: 18px;
-    color: #888;
-  }
-</style>
-  

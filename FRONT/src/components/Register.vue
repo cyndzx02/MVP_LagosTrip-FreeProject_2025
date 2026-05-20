@@ -1,126 +1,119 @@
 <template>
-  <div class="row register-row">
-    <div class="col-md-6 offset-md-3">
-      <div class="login-box">
-        <form class="form-register" @submit.prevent="handleSubmit">
-          <p class="register">Register</p>
-          <div class="form-group">
-            <label class="label-register">Name</label>
-            <input type="name" class="register-input" required v-model="name" />
-          </div>
-          <div class="form-group">
-            <label class="label-register">Email</label>
-            <input type="email" class="register-input" required v-model="email" />
-          </div>
-          <div class="form-group">
-            <label class="label-register">Password</label>
-            <input
-              type="password"
-              class="register-input"
-              required
-              v-model="password"
-            />
-            <div v-if="passwordError" class="error">{{ passwordError }}</div>
-          </div>
+  <div class="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-slate-100 px-4 py-8 sm:py-12">
+    <div class="w-full max-w-md">
+      <form
+        class="card-soft space-y-5 p-6 sm:p-10"
+        @submit.prevent="handleSubmit"
+      >
+        <h1 class="text-2xl font-bold text-slate-900 sm:text-3xl">Inscription</h1>
+        <p class="text-sm text-slate-500">Crée ton compte AgroNova en quelques secondes.</p>
 
-          <div class="my-3">
-            <button type="submit" class="btn register-btn pill rounded-lg">Register</button>
-          </div>
-        </form>
-      </div>
+        <div>
+          <label class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">
+            Nom complet
+          </label>
+          <input
+            v-model="name"
+            type="text"
+            required
+            autocomplete="name"
+            class="input-field"
+          />
+        </div>
+
+        <div>
+          <label class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">
+            Email
+          </label>
+          <input
+            v-model="email"
+            type="email"
+            required
+            autocomplete="email"
+            class="input-field"
+          />
+        </div>
+
+        <div>
+          <label class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">
+            Mot de passe
+          </label>
+          <input
+            v-model="password"
+            type="password"
+            required
+            autocomplete="new-password"
+            class="input-field"
+          />
+          <p v-if="passwordError" class="mt-1 text-xs text-red-600">{{ passwordError }}</p>
+        </div>
+
+        <p v-if="serverError" class="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+          {{ serverError }}
+        </p>
+
+        <button
+          type="submit"
+          class="btn-primary w-full text-base"
+          :disabled="loading"
+        >
+          {{ loading ? 'Inscription…' : "S'inscrire" }}
+        </button>
+
+        <p class="text-center text-sm text-slate-600">
+          Déjà inscrit ?
+          <router-link to="/login" class="font-semibold text-brand-500 hover:underline">
+            Se connecter
+          </router-link>
+        </p>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-export default {
-  name: "RegisterPage",
 
+const API_BASE_URL = process.env.VUE_APP_API_URL || 'http://localhost:3000'
+
+export default {
+  name: 'RegisterPage',
   data() {
     return {
-      name: "",
-      email: "",
-      password: "",
-      passwordError: "",
-    };
+      name: '',
+      email: '',
+      password: '',
+      passwordError: '',
+      serverError: '',
+      loading: false,
+    }
   },
   methods: {
-    handleSubmit() {
-      //console.log("form submitted");
+    async handleSubmit() {
+      this.serverError = ''
       this.passwordError =
         this.password.length > 5
-          ? ""
-          : "Password must be at least 6 characters long";
-      if (!this.passwordError) {
-        console.log("email:", this.email);
-        console.log("password:", this.password);
-        var name = this.name; var email = this.email; var password = this.password;
-        axios
-          .post("http://localhost:3000/register",{name, email, password})
-          .then((response) => (this.info = response.data))
-          .catch((error) => console.log(error));
+          ? ''
+          : 'Le mot de passe doit faire au moins 6 caractères'
+      if (this.passwordError) return
+
+      this.loading = true
+      try {
+        await axios.post(`${API_BASE_URL}/register`, {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        })
+        localStorage.setItem('userFullName', this.name)
+        localStorage.setItem('userEmail', this.email)
+        this.$router.push('/login')
+      } catch (error) {
+        this.serverError =
+          error.response?.data?.message || "L'inscription a échoué."
+      } finally {
+        this.loading = false
       }
     },
   },
-};
+}
 </script>
-
-<style  scoped>
-/* { */
-.register-row {
-   height: 100vh; 
-  background-color: #f0f0f0;
-}
-.register {
-  margin-left: 150px !important;
-  color: #aaa;
-  display: inline-block;
-  font-size: 0.6em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: bold;
-}
-.register-btn {
-  cursor: pointer !important;
-  border-radius: 35px !important;
-  margin-left: 0 !important;
-  font-size: 20px;
-  width: 100% !important;
-  color: white;
-  align-self: center;
-  background-color: rgb(6, 6, 66);
-}
-
-.form-register {
- 
-  max-width: 420px;
-  margin: 30px auto;
-  background: white;
-  text-align: left;
-  padding: 40px;
-  padding-top: 3%;
-  border-radius: 10px;
-
-}
-.label-register {
-  color: #aaa;
-  display: inline-block;
-  margin: 25px 0 15px;
-  font-size: 0.6em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: bold;
-}
-.register-input {
-  display: block;
-  padding: 10px 6px;
-  width: 100%;
-  box-sizing: border-box;
-  border: none;
-  border-bottom: 1px solid #ddd;
-  color: #555;
-}
-
-</style>
-<!--  -->
